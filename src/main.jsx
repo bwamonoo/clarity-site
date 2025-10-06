@@ -26,6 +26,7 @@ import './styles/pages/_admin.css'
 import './styles/utilities/_spacing.css'
 import './styles/utilities/_display.css'
 import './styles/utilities/_utilities.css'
+import './styles/components/_admin-login.css'
 
 createRoot(document.getElementById('root')).render(
   <React.StrictMode>

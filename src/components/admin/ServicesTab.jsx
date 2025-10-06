@@ -14,6 +14,7 @@ export default function ServicesTab() {
   } = useServices()
 
   const [showForm, setShowForm] = useState(false)
+  const [showCustomCategory, setShowCustomCategory] = useState(false)
   const [formData, setFormData] = useState({
     name: '',
     description: '',
@@ -22,6 +23,7 @@ export default function ServicesTab() {
     duration: '',
     icon: 'bi-eye',
     category: 'diagnostic',
+    customCategory: '',
     active: true
   })
 
@@ -35,24 +37,30 @@ export default function ServicesTab() {
       duration: '',
       icon: 'bi-eye',
       category: 'diagnostic',
+      customCategory: '',
       active: true
     })
+    setShowCustomCategory(false)
     setEditingService(null)
     setShowForm(false)
   }
 
   // Handle edit
   const handleEdit = (service) => {
+    const isCustomCategory = !categories.some(cat => cat.value === service.category)
+    
     setFormData({
       name: service.name,
       description: service.description,
       short_description: service.short_description,
-      price: service.price,
+      price: service.price || '',
       duration: service.duration,
       icon: service.icon,
-      category: service.category,
+      category: isCustomCategory ? 'custom' : service.category,
+      customCategory: isCustomCategory ? service.category : '',
       active: service.active
     })
+    setShowCustomCategory(isCustomCategory)
     setEditingService(service)
     setShowForm(true)
   }
@@ -60,15 +68,35 @@ export default function ServicesTab() {
   // Handle form submit
   const handleSubmit = async (e) => {
     e.preventDefault()
+    
+    // Use custom category if selected, otherwise use predefined category
+    const finalCategory = showCustomCategory ? formData.customCategory : formData.category
+    
+    // Handle optional price - convert to null if empty string
+    const finalPrice = formData.price === '' ? null : parseFloat(formData.price)
+    
     const result = await saveService({
       ...formData,
       id: editingService?.id,
-      price: parseFloat(formData.price),
-      duration: parseInt(formData.duration)
+      price: finalPrice,
+      duration: parseInt(formData.duration),
+      category: finalCategory
     })
     
     if (result.success) {
       resetForm()
+    }
+  }
+
+  // Handle category change
+  const handleCategoryChange = (e) => {
+    const value = e.target.value
+    if (value === 'custom') {
+      setShowCustomCategory(true)
+      setFormData(prev => ({ ...prev, category: 'custom' }))
+    } else {
+      setShowCustomCategory(false)
+      setFormData(prev => ({ ...prev, category: value, customCategory: '' }))
     }
   }
 
@@ -79,13 +107,15 @@ export default function ServicesTab() {
     { value: 'surgical', label: 'Surgical' },
     { value: 'medical', label: 'Medical' },
     { value: 'pediatric', label: 'Pediatric' },
-    { value: 'rehabilitative', label: 'Rehabilitative' }
+    { value: 'rehabilitative', label: 'Rehabilitative' },
+    { value: 'custom', label: '➕ Custom Category' }
   ]
 
   // Icon options
   const icons = [
     'bi-eye', 'bi-person', 'bi-scissors', 'bi-droplet', 'bi-heart', 
-    'bi-award', 'bi-patch-check', 'bi-thermometer'
+    'bi-award', 'bi-patch-check', 'bi-thermometer', 'bi-stethoscope',
+    'bi-prescription', 'bi-hospital', 'bi-shield-check', 'bi-graph-up'
   ]
 
   return (
@@ -129,12 +159,14 @@ export default function ServicesTab() {
                       required
                     />
                   </div>
+                  
+                  {/* Category Field - Now with custom option */}
                   <div className="col-md-6">
                     <label className="form-label fw-semibold">Category</label>
                     <select
                       className="form-select elegant-input"
                       value={formData.category}
-                      onChange={(e) => setFormData({...formData, category: e.target.value})}
+                      onChange={handleCategoryChange}
                     >
                       {categories.map(cat => (
                         <option key={cat.value} value={cat.value}>
@@ -142,18 +174,43 @@ export default function ServicesTab() {
                         </option>
                       ))}
                     </select>
+                    
+                    {/* Custom Category Input */}
+                    {showCustomCategory && (
+                      <div className="mt-2">
+                        <input
+                          type="text"
+                          className="form-control elegant-input"
+                          value={formData.customCategory}
+                          onChange={(e) => setFormData({...formData, customCategory: e.target.value})}
+                          placeholder="Enter custom category name"
+                          required={showCustomCategory}
+                        />
+                        <small className="text-muted">Enter your custom category name</small>
+                      </div>
+                    )}
                   </div>
+
+                  {/* Optional Price Field */}
                   <div className="col-md-6">
-                    <label className="form-label fw-semibold">Price ($) *</label>
+                    <label className="form-label fw-semibold">
+                      Price ($) 
+                      <span className="text-muted fw-normal"> - Optional</span>
+                    </label>
                     <input
                       type="number"
                       step="0.01"
+                      min="0"
                       className="form-control elegant-input"
                       value={formData.price}
                       onChange={(e) => setFormData({...formData, price: e.target.value})}
-                      required
+                      placeholder="Leave empty for consultation-based pricing"
                     />
+                    <small className="text-muted">
+                      Leave empty for services without fixed pricing (consultations, etc.)
+                    </small>
                   </div>
+
                   <div className="col-md-6">
                     <label className="form-label fw-semibold">Duration (minutes) *</label>
                     <input
@@ -162,8 +219,10 @@ export default function ServicesTab() {
                       value={formData.duration}
                       onChange={(e) => setFormData({...formData, duration: e.target.value})}
                       required
+                      min="1"
                     />
                   </div>
+
                   <div className="col-12">
                     <label className="form-label fw-semibold">Short Description</label>
                     <input
@@ -174,6 +233,7 @@ export default function ServicesTab() {
                       placeholder="Brief description for cards"
                     />
                   </div>
+
                   <div className="col-12">
                     <label className="form-label fw-semibold">Full Description</label>
                     <textarea
@@ -183,6 +243,7 @@ export default function ServicesTab() {
                       onChange={(e) => setFormData({...formData, description: e.target.value})}
                     />
                   </div>
+
                   <div className="col-md-6">
                     <label className="form-label fw-semibold">Icon</label>
                     <select
@@ -193,11 +254,12 @@ export default function ServicesTab() {
                       {icons.map(icon => (
                         <option key={icon} value={icon}>
                           <i className={`bi ${icon} me-2`}></i>
-                          {icon}
+                          {icon.replace('bi-', '')}
                         </option>
                       ))}
                     </select>
                   </div>
+
                   <div className="col-md-6">
                     <label className="form-label fw-semibold">Status</label>
                     <div className="form-check form-switch mt-2">
@@ -213,6 +275,7 @@ export default function ServicesTab() {
                     </div>
                   </div>
                 </div>
+
                 <div className="mt-4">
                   <button type="submit" className="btn btn-gradient-primary me-2" disabled={loading}>
                     {loading ? (
@@ -288,7 +351,9 @@ export default function ServicesTab() {
                     {/* Meta Information */}
                     <div className="service-meta mb-3">
                       <div className="d-flex justify-content-between align-items-center">
-                        <span className="fw-bold text-accent">${service.price}</span>
+                        <span className={`fw-bold ${service.price ? 'text-accent' : 'text-muted'}`}>
+                          {service.price ? ` GH₵ ${service.price}` : 'Price on consultation'}
+                        </span>
                         <span className="text-muted small">
                           <i className="bi bi-clock me-1"></i>
                           {service.duration} mins

@@ -23,7 +23,7 @@ export default function ServiceSelection({ services, selectedService, onServiceS
                   <p className="small text-muted mb-2">{service.description}</p>
                   <div className="d-flex justify-content-between align-items-center">
                     <span className="small text-muted">{service.duration} mins</span>
-                    <span className="fw-semibold text-accent">${service.price}</span>
+                    <span className="fw-semibold text-accent">{service.price ? ` GH₵ ${service.price}` : ''}</span>
                   </div>
                 </div>
               </div>

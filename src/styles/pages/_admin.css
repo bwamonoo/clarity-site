@@ -5,6 +5,8 @@
               rgba(248, 250, 252, 0.95), 
               rgba(224, 232, 240, 0.9), 
               rgba(248, 250, 252, 0.95));
+  position: relative;
+  overflow-x: hidden;
 }
 
 .admin-background {
@@ -22,76 +24,397 @@
   opacity: 0.05;
 }
 
-/* Admin Service Cards - Clean & Professional */
-.admin-service-card {
-  background: var(--surface);
+/* Loading Page */
+.admin-loading-page {
+  background: linear-gradient(135deg, 
+              rgba(248, 250, 252, 0.95), 
+              rgba(224, 232, 240, 0.9));
+}
+
+/* Floating Elements */
+.floating-elements {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 1;
+}
+
+.floating-dot {
+  position: absolute;
+  border-radius: 50%;
+  opacity: 0.6;
+  animation: float 6s ease-in-out infinite;
+}
+
+.dot-1 {
+  top: 20%;
+  left: 10%;
+  width: 6px;
+  height: 6px;
+  background: var(--accent-light);
+  animation-delay: 0s;
+}
+
+.dot-2 {
+  top: 70%;
+  right: 15%;
+  width: 5px;
+  height: 5px;
+  background: var(--brand-300);
+  animation-delay: 2s;
+}
+
+.dot-3 {
+  bottom: 30%;
+  left: 20%;
+  width: 4px;
+  height: 4px;
+  background: var(--accent);
+  animation-delay: 4s;
+}
+
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0) scale(1);
+    opacity: 0.6;
+  }
+  50% {
+    transform: translateY(-15px) scale(1.05);
+    opacity: 0.8;
+  }
+}
+
+/* Glass Header */
+.admin-header-glass {
+  background: rgba(255, 255, 255, 0.15);
+  backdrop-filter: blur(20px);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.3);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+}
+
+.admin-header-logo {
+  width: 50px;
+  height: 50px;
+  background: linear-gradient(135deg, var(--accent), var(--accent-light));
   border-radius: 12px;
-  transition: all 0.2s ease;
-  border: 1px solid var(--border);
-}
-
-.admin-service-card:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
-  border-color: var(--accent-light);
-}
-
-.service-icon-admin {
-  width: 48px;
-  height: 48px;
   display: flex;
   align-items: center;
   justify-content: center;
-  background: linear-gradient(135deg, rgba(0,105,92,0.1), rgba(77,182,172,0.05));
-  border-radius: 12px;
-  transition: background 0.2s ease;
+  box-shadow: 0 4px 15px rgba(0, 105, 92, 0.3);
 }
 
-.admin-service-card:hover .service-icon-admin {
-  background: linear-gradient(135deg, rgba(0,105,92,0.15), rgba(77,182,172,0.1));
+.admin-header-logo i {
+  font-size: 1.5rem;
+  color: white;
 }
 
-/* Elegant Inputs */
-.elegant-input {
-  border: 1px solid var(--border);
+.admin-header-title {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--brand-700);
+  margin-bottom: 0.25rem;
+}
+
+.admin-header-subtitle {
+  color: var(--text-light);
+  margin-bottom: 0;
+  font-size: 0.9rem;
+}
+
+.admin-user-name {
+  font-weight: 600;
+  color: var(--text-dark);
+}
+
+.admin-user-info {
+  color: var(--text-light);
+  font-size: 0.8rem;
+}
+
+/* Glass Sidebar */
+.glass-sidebar-card {
+  background: rgba(255, 255, 255, 0.2);
+  backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  border-radius: 16px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+}
+
+.sidebar-header {
+  background: linear-gradient(135deg, var(--brand-500), var(--brand-700));
+  color: white;
+  padding: 1.25rem 1.5rem;
+}
+
+.sidebar-body {
+  padding: 1rem;
+}
+
+.sidebar-nav-link {
+  border: none;
+  background: transparent;
+  border-radius: 10px;
+  transition: all 0.3s ease;
+  color: var(--text-dark);
+  text-decoration: none;
+  width: 100%;
+}
+
+.sidebar-nav-active {
+  background: linear-gradient(135deg, var(--accent), var(--accent-light));
+  color: white;
+  box-shadow: 0 4px 15px rgba(0, 105, 92, 0.3);
+}
+
+.sidebar-nav-inactive {
+  background: rgba(255, 255, 255, 0.6);
+}
+
+.sidebar-nav-inactive:hover {
+  background: rgba(255, 255, 255, 0.8);
+  transform: translateX(4px);
+}
+
+.sidebar-nav-logout {
+  background: rgba(239, 68, 68, 0.1);
+  color: #dc2626;
+}
+
+.sidebar-nav-logout:hover {
+  background: rgba(239, 68, 68, 0.2);
+}
+
+/* Glass Cards */
+.glass-admin-card {
+  background: rgba(255, 255, 255, 0.2);
+  backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  border-radius: 16px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+}
+
+.glass-card-header {
+  background: linear-gradient(135deg, var(--brand-500), var(--brand-700));
+  color: white;
+  padding: 1.25rem 1.5rem;
+}
+
+.glass-card-title {
+  font-size: 1.25rem;
+  font-weight: 600;
+  margin-bottom: 0.25rem;
+  color: white;
+}
+
+.glass-card-subtitle {
+  color: rgba(255, 255, 255, 0.8);
+  margin-bottom: 0;
+  font-size: 0.9rem;
+}
+
+.glass-card-body {
+  padding: 1.5rem;
+  background: rgba(255, 255, 255, 0.1);
+}
+
+/* Glass Form Elements */
+.form-label-glass {
+  display: block;
+  margin-bottom: 0.4rem;
+  font-weight: 600;
+  color: var(--text-dark);
+  font-size: 0.85rem;
+}
+
+.form-select-glass {
+  background: rgba(255, 255, 255, 0.8);
+  border: 2px solid rgba(255, 255, 255, 0.5);
   border-radius: 8px;
-  padding: 0.75rem 1rem;
-  transition: all 0.2s ease;
-  background: var(--surface);
+  padding: 0.5rem 1rem;
+  transition: all 0.3s ease;
+  backdrop-filter: blur(10px);
 }
 
-.elegant-input:focus {
+.form-select-glass:focus {
+  outline: none;
   border-color: var(--accent);
-  box-shadow: 0 0 0 0.2rem rgba(0, 105, 92, 0.1);
+  background: rgba(255, 255, 255, 0.95);
+  box-shadow: 0 0 0 3px rgba(0, 105, 92, 0.1);
 }
 
-/* Admin Table Styles */
-.admin-table {
+/* Glass Buttons */
+.btn-glass-admin {
+  background: rgba(255, 255, 255, 0.2);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  color: var(--text-dark);
+  border-radius: 8px;
+  padding: 0.5rem 1rem;
+  transition: all 0.3s ease;
+}
+
+.btn-glass-admin:hover {
+  background: rgba(255, 255, 255, 0.3);
+  transform: translateY(-1px);
+}
+
+.btn-glass-icon {
+  background: rgba(255, 255, 255, 0.2);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  color: var(--text-dark);
+  border-radius: 6px;
+  padding: 0.375rem 0.75rem;
+  transition: all 0.3s ease;
+}
+
+.btn-glass-icon:hover {
+  background: rgba(255, 255, 255, 0.3);
+}
+
+.btn-glass-action {
+  background: rgba(255, 255, 255, 0.2);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  border-radius: 6px;
+  padding: 0.25rem 0.5rem;
+  transition: all 0.3s ease;
+  font-size: 0.875rem;
+}
+
+.btn-glass-action:hover {
+  background: rgba(255, 255, 255, 0.3);
+  transform: translateY(-1px);
+}
+
+/* Glass Badges */
+.badge-glass-warning {
+  background: rgba(245, 158, 11, 0.2);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(245, 158, 11, 0.3);
+  color: #92400e;
+}
+
+.badge-glass-success {
+  background: rgba(16, 185, 129, 0.2);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(16, 185, 129, 0.3);
+  color: #065f46;
+}
+
+.badge-glass-info {
+  background: rgba(59, 130, 246, 0.2);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(59, 130, 246, 0.3);
+  color: #1e40af;
+}
+
+.badge-glass-danger {
+  background: rgba(239, 68, 68, 0.2);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(239, 68, 68, 0.3);
+  color: #991b1b;
+}
+
+.badge-glass-secondary {
+  background: rgba(107, 114, 128, 0.2);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(107, 114, 128, 0.3);
+  color: #374151;
+}
+
+/* Glass Table */
+.admin-table-glass {
+  background: rgba(255, 255, 255, 0.1);
   border-radius: 12px;
   overflow: hidden;
 }
 
-.admin-table thead {
+.admin-table-glass thead {
   background: linear-gradient(135deg, var(--accent), var(--accent-light));
   color: white;
 }
 
-.admin-table th {
+.admin-table-glass th {
   border: none;
   padding: 1rem;
   font-weight: 600;
   font-size: 0.9rem;
+  background: rgba(0, 105, 92, 0.8);
 }
 
-.admin-table td {
+.admin-table-glass td {
   padding: 1rem;
-  border-color: var(--border);
+  border-color: rgba(255, 255, 255, 0.2);
   vertical-align: middle;
+  background: rgba(255, 255, 255, 0.05);
 }
 
-.admin-table-row:hover {
-  background: rgba(0, 105, 92, 0.03);
+.admin-table-row-glass:hover td {
+  background: rgba(255, 255, 255, 0.1);
   transition: background 0.2s ease;
+}
+
+/* Glass Alerts */
+.alert-glass-error {
+  background: rgba(239, 68, 68, 0.1);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(239, 68, 68, 0.2);
+  border-radius: 12px;
+  padding: 1rem 1.5rem;
+  color: #dc2626;
+  font-weight: 500;
+}
+
+.alert-glass-success {
+  background: rgba(16, 185, 129, 0.1);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(16, 185, 129, 0.2);
+  border-radius: 12px;
+  padding: 1rem 1.5rem;
+  color: #065f46;
+  font-weight: 500;
+}
+
+/* Glass Dropdown */
+.glass-dropdown {
+  background: rgba(255, 255, 255, 0.2);
+  backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  border-radius: 12px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+}
+
+.glass-dropdown .dropdown-item {
+  padding: 0.5rem 1rem;
+  color: var(--text-dark);
+  transition: all 0.2s ease;
+}
+
+.glass-dropdown .dropdown-item:hover {
+  background: rgba(255, 255, 255, 0.3);
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .admin-header .container-fluid {
+    padding: 1rem;
+  }
+  
+  .admin-table-glass {
+    font-size: 0.875rem;
+  }
+  
+  .admin-table-glass th,
+  .admin-table-glass td {
+    padding: 0.75rem 0.5rem;
+  }
+
+  .glass-sidebar-card {
+    margin-bottom: 1rem;
+  }
 }
 
 /* Text Colors */
@@ -110,61 +433,4 @@
 /* Loading States */
 .spinner-border.text-accent {
   color: var(--accent) !important;
-}
-
-/* Form Controls - Professional Style */
-.form-check-input:checked {
-  background-color: var(--accent);
-  border-color: var(--accent);
-}
-
-.form-check-input:focus {
-  border-color: var(--accent);
-  box-shadow: 0 0 0 0.2rem rgba(0, 105, 92, 0.25);
-}
-
-/* Badge Styles */
-.badge {
-  font-weight: 500;
-  padding: 0.35em 0.65em;
-}
-
-/* Button Group Styles */
-.btn-group .btn {
-  border-radius: 6px;
-}
-
-/* Responsive Design */
-@media (max-width: 768px) {
-  .admin-header .container-fluid {
-    padding: 1rem;
-  }
-  
-  .admin-table {
-    font-size: 0.875rem;
-  }
-  
-  .admin-table th,
-  .admin-table td {
-    padding: 0.75rem 0.5rem;
-  }
-
-  .admin-service-card {
-    margin-bottom: 1rem;
-  }
-}
-
-/* Glass Card Effect for Forms */
-.glass-card {
-  background: rgba(255, 255, 255, 0.95);
-  backdrop-filter: blur(10px);
-  border: 1px solid rgba(255, 255, 255, 0.2);
-  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
-}
-
-/* Elegant Header */
-.elegant-header {
-  background: linear-gradient(135deg, var(--brand-500), var(--brand-700));
-  color: white;
-  padding: 1.25rem 1.5rem;
 }

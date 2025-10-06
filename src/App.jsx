@@ -10,24 +10,34 @@ import Contact from './pages/Contact'
 import Appointments from './pages/Appointments'
 import Admin from './pages/Admin'
 
-export default function App(){
+// Main site content wrapper
+function MainSite({ children }) {
   return (
     <>
       <Header />
       <main className="py-0">
         <div className="container-custom">
-          <Routes>
-            <Route path="/" element={<Home />} />
-            <Route path="/about" element={<About />} />
-            <Route path="/services" element={<Services />} />
-            <Route path="/staff" element={<Staff />} />
-            <Route path="/contact" element={<Contact />} />
-            <Route path="/appointments" element={<Appointments />} />
-            <Route path="/admin" element={<Admin />} />
-          </Routes>
+          {children}
         </div>
       </main>
       <Footer />
     </>
+  )
+}
+
+export default function App(){
+  return (
+    <Routes>
+      {/* Public routes */}
+      <Route path="/" element={<MainSite><Home /></MainSite>} />
+      <Route path="/about" element={<MainSite><About /></MainSite>} />
+      <Route path="/services" element={<MainSite><Services /></MainSite>} />
+      <Route path="/staff" element={<MainSite><Staff /></MainSite>} />
+      <Route path="/contact" element={<MainSite><Contact /></MainSite>} />
+      <Route path="/appointments" element={<MainSite><Appointments /></MainSite>} />
+      
+      {/* Admin routes - no wrapper, admin handles its own layout */}
+      <Route path="/admin/*" element={<Admin />} />
+    </Routes>
   )
 }

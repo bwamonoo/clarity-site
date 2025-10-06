@@ -25,8 +25,8 @@ export default function ServiceCard({
           {/* Price Badge */}
           {price && (
             <div className="price-badge">
-              <i className="bi bi-currency-dollar me-1"></i>
-              {price}
+              <i className="bi me-1"></i>
+              {`GH₵ ${price}`}
             </div>
           )}
 

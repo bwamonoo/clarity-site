@@ -64,8 +64,8 @@ export default function Admin() {
 
   if (loading) {
     return (
-      <div className="min-vh-100 d-flex align-items-center justify-content-center">
-        <div className="spinner-border text-primary"></div>
+      <div className="admin-loading-page min-vh-100 d-flex align-items-center justify-content-center">
+        <div className="spinner-border text-accent"></div>
       </div>
     )
   }
@@ -80,13 +80,20 @@ export default function Admin() {
       <div className="admin-background">
         <div className="background-pattern"></div>
       </div>
+
+      {/* Floating decorative elements */}
+      <div className="floating-elements">
+        <div className="floating-dot dot-1"></div>
+        <div className="floating-dot dot-2"></div>
+        <div className="floating-dot dot-3"></div>
+      </div>
       
       <AdminHeader activeTab={activeTab} onLogout={handleLogout} />
       
-      {/* Rest of your admin component remains the same */}
+      {/* Messages */}
       <div className="container-fluid mt-3">
         {error && (
-          <div className="alert alert-danger alert-dismissible fade show glass-card" role="alert">
+          <div className="alert alert-glass-error alert-dismissible fade show" role="alert">
             <i className="bi bi-exclamation-triangle-fill me-2"></i>
             {error}
             <button type="button" className="btn-close" onClick={clearMessages}></button>
@@ -94,7 +101,7 @@ export default function Admin() {
         )}
         
         {success && (
-          <div className="alert alert-success alert-dismissible fade show glass-card" role="alert">
+          <div className="alert alert-glass-success alert-dismissible fade show" role="alert">
             <i className="bi bi-check-circle-fill me-2"></i>
             {success}
             <button type="button" className="btn-close" onClick={clearMessages}></button>
@@ -106,22 +113,22 @@ export default function Admin() {
         <div className="row">
           {/* Sidebar Navigation */}
           <div className="col-md-3 col-lg-2 mb-4">
-            <div className="card elegant-card border-0">
-              <div className="elegant-header py-3">
+            <div className="glass-sidebar-card">
+              <div className="sidebar-header">
                 <h6 className="mb-0 text-white">
                   <i className="bi bi-speedometer2 me-2"></i>
                   Admin Panel
                 </h6>
               </div>
-              <div className="card-body p-3">
+              <div className="sidebar-body">
                 <nav className="nav flex-column">
                   {tabs.map(tab => (
                     <button
                       key={tab.id}
-                      className={`nav-link text-start d-flex align-items-center py-3 px-3 mb-2 rounded-3 ${
+                      className={`sidebar-nav-link text-start d-flex align-items-center py-3 px-3 mb-2 ${
                         activeTab === tab.id 
-                          ? 'btn-gradient-primary text-white' 
-                          : 'btn-outline-accent text-dark'
+                          ? 'sidebar-nav-active' 
+                          : 'sidebar-nav-inactive'
                       }`}
                       onClick={() => handleTabChange(tab.id)}
                     >
@@ -130,7 +137,7 @@ export default function Admin() {
                     </button>
                   ))}
                   <button
-                    className="nav-link text-start d-flex align-items-center py-3 px-3 mb-2 rounded-3 btn-outline-danger text-dark"
+                    className="sidebar-nav-link text-start d-flex align-items-center py-3 px-3 mb-2 sidebar-nav-logout"
                     onClick={handleLogout}
                   >
                     <i className="bi bi-box-arrow-right me-3"></i>

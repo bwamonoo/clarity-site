@@ -1,3 +1,4 @@
+// src/components/admin/AppointmentsTab.jsx
 import React, { useState, useMemo } from 'react'
 import { useAppointments } from '../../hooks/useAppointments'
 
@@ -31,14 +32,15 @@ export default function AppointmentsTab() {
   // Status badge component
   const StatusBadge = ({ status }) => {
     const config = {
-      pending: { class: 'bg-warning', label: 'Pending' },
-      confirmed: { class: 'bg-success', label: 'Confirmed' },
-      completed: { class: 'bg-info', label: 'Completed' },
-      cancelled: { class: 'bg-danger', label: 'Cancelled' }
-    }[status] || { class: 'bg-secondary', label: status }
+      pending: { class: 'badge-glass-warning', label: 'Pending', icon: 'bi-clock' },
+      confirmed: { class: 'badge-glass-success', label: 'Confirmed', icon: 'bi-check-circle' },
+      completed: { class: 'badge-glass-info', label: 'Completed', icon: 'bi-check2-all' },
+      cancelled: { class: 'badge-glass-danger', label: 'Cancelled', icon: 'bi-x-circle' }
+    }[status] || { class: 'badge-glass-secondary', label: status, icon: 'bi-question' }
 
     return (
-      <span className={`badge ${config.class}`}>
+      <span className={`badge ${config.class} d-inline-flex align-items-center gap-1`}>
+        <i className={`bi ${config.icon}`}></i>
         {config.label}
       </span>
     )
@@ -98,20 +100,20 @@ export default function AppointmentsTab() {
   }
 
   return (
-    <div className="card shadow-sm border-0">
-      <div className="card-header bg-white border-0">
+    <div className="glass-admin-card">
+      <div className="glass-card-header">
         <div className="d-flex justify-content-between align-items-center">
           <div>
-            <h5 className="card-title mb-1">Appointment Management</h5>
-            <p className="text-muted mb-0">
+            <h5 className="glass-card-title">Appointment Management</h5>
+            <p className="glass-card-subtitle">
               {filteredAppointments.length} appointment(s) found
             </p>
           </div>
           <div className="d-flex gap-3">
             <div>
-              <label className="form-label small text-muted mb-1">Date Filter</label>
+              <label className="form-label-glass small mb-1">Date Filter</label>
               <select 
-                className="form-select form-select-sm"
+                className="form-select-glass form-select-sm"
                 value={dateFilter}
                 onChange={(e) => setDateFilter(e.target.value)}
               >
@@ -122,9 +124,9 @@ export default function AppointmentsTab() {
               </select>
             </div>
             <div>
-              <label className="form-label small text-muted mb-1">Status Filter</label>
+              <label className="form-label-glass small mb-1">Status Filter</label>
               <select 
-                className="form-select form-select-sm"
+                className="form-select-glass form-select-sm"
                 value={statusFilter}
                 onChange={(e) => setStatusFilter(e.target.value)}
               >
@@ -137,7 +139,7 @@ export default function AppointmentsTab() {
             </div>
             <div className="d-flex align-items-end">
               <button 
-                className="btn btn-outline-primary btn-sm"
+                className="btn btn-glass-icon"
                 onClick={refreshAppointments}
                 disabled={loading}
               >
@@ -148,42 +150,42 @@ export default function AppointmentsTab() {
         </div>
       </div>
 
-      <div className="card-body">
+      <div className="glass-card-body">
         {loading ? (
           <div className="text-center py-5">
-            <div className="spinner-border text-primary" role="status">
+            <div className="spinner-border text-accent" role="status">
               <span className="visually-hidden">Loading...</span>
             </div>
             <p className="text-muted mt-2">Loading appointments...</p>
           </div>
         ) : filteredAppointments.length === 0 ? (
           <div className="text-center py-5 text-muted">
-            <i className="bi bi-calendar-x display-4 d-block mb-3"></i>
-            <h5>No appointments found</h5>
+            <i className="bi bi-calendar-x display-4 d-block mb-3 text-light-custom"></i>
+            <h5 className="text-brand">No appointments found</h5>
             <p>Try adjusting your filters</p>
           </div>
         ) : (
           <div className="table-responsive">
-            <table className="table table-hover align-middle">
-              <thead className="table-light">
+            <table className="table table-hover align-middle admin-table-glass">
+              <thead>
                 <tr>
-                  <th>Patient</th>
+                  <th className="ps-4">Patient</th>
                   <th>Service</th>
                   <th>Date & Time</th>
                   <th>Contact</th>
                   <th>Status</th>
-                  <th className="text-center">Actions</th>
+                  <th className="text-center pe-4">Actions</th>
                 </tr>
               </thead>
               <tbody>
                 {filteredAppointments.map(appointment => (
-                  <tr key={appointment.id}>
-                    <td>
+                  <tr key={appointment.id} className="admin-table-row-glass">
+                    <td className="ps-4">
                       <div>
-                        <strong>{appointment.patient_name}</strong>
+                        <strong className="text-brand">{appointment.patient_name}</strong>
                         {appointment.patient_notes && (
                           <div className="text-muted small mt-1">
-                            <i className="bi bi-chat-text me-1"></i>
+                            <i className="bi bi-chat-text me-1 text-accent"></i>
                             Has notes
                           </div>
                         )}
@@ -191,31 +193,31 @@ export default function AppointmentsTab() {
                     </td>
                     <td>
                       <div>
-                        <div>{appointment.service_name}</div>
+                        <div className="text-dark-custom">{appointment.service_name}</div>
                         <small className="text-muted">{appointment.service_duration} mins</small>
                       </div>
                     </td>
                     <td>
                       <div>
-                        <div>{new Date(appointment.appointment_date).toLocaleDateString()}</div>
-                        <small className="text-muted">{appointment.appointment_time}</small>
+                        <div className="text-dark-custom fw-medium">
+                          {new Date(appointment.appointment_date).toLocaleDateString()}
+                        </div>
+                        <small className="text-light-custom">{appointment.appointment_time}</small>
                       </div>
                     </td>
                     <td>
-                      <div>
-                        <div>{appointment.patient_phone}</div>
-                        <small className="text-muted">{appointment.patient_email}</small>
-                      </div>
+                      <div className="text-dark-custom">{appointment.patient_phone}</div>
+                      <small className="text-light-custom">{appointment.patient_email}</small>
                     </td>
                     <td>
                       <StatusBadge status={appointment.status} />
                     </td>
-                    <td className="text-center">
+                    <td className="text-center pe-4">
                       <div className="btn-group btn-group-sm">
                         {getActionButtons(appointment).map(button => (
                           <button
                             key={button.action}
-                            className={`btn btn-outline-${button.variant}`}
+                            className={`btn btn-glass-action btn-${button.variant}`}
                             onClick={() => handleStatusUpdate(appointment.id, button.action)}
                             disabled={loading}
                             title={button.label}

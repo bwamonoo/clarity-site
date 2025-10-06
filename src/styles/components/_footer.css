@@ -1,0 +1,19 @@
+.footer {
+  background: linear-gradient(135deg, var(--brand-700), var(--brand-500));
+  color: rgba(255,255,255,0.95);
+  padding: 3rem 0;
+}
+
+.footer a { 
+  color: rgba(255,255,255,0.95); 
+  text-decoration: none; 
+  transition: color .15s ease; 
+}
+
+.footer a:hover { 
+  color: #fff; 
+}
+
+.footer .muted { 
+  color: rgba(255,255,255,0.68); 
+}

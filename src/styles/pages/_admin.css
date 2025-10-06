@@ -1,0 +1,170 @@
+/* src/styles/pages/_admin.css */
+/* Admin Page Background */
+.admin-dashboard {
+  background: linear-gradient(135deg, 
+              rgba(248, 250, 252, 0.95), 
+              rgba(224, 232, 240, 0.9), 
+              rgba(248, 250, 252, 0.95));
+}
+
+.admin-background {
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+}
+
+.admin-background .background-pattern {
+  position: absolute;
+  inset: 0;
+  background-image: 
+    radial-gradient(circle at 10% 20%, var(--accent-light) 0%, transparent 50%),
+    radial-gradient(circle at 90% 80%, var(--brand-300) 0%, transparent 50%);
+  opacity: 0.05;
+}
+
+/* Admin Service Cards - Clean & Professional */
+.admin-service-card {
+  background: var(--surface);
+  border-radius: 12px;
+  transition: all 0.2s ease;
+  border: 1px solid var(--border);
+}
+
+.admin-service-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+  border-color: var(--accent-light);
+}
+
+.service-icon-admin {
+  width: 48px;
+  height: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(135deg, rgba(0,105,92,0.1), rgba(77,182,172,0.05));
+  border-radius: 12px;
+  transition: background 0.2s ease;
+}
+
+.admin-service-card:hover .service-icon-admin {
+  background: linear-gradient(135deg, rgba(0,105,92,0.15), rgba(77,182,172,0.1));
+}
+
+/* Elegant Inputs */
+.elegant-input {
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 0.75rem 1rem;
+  transition: all 0.2s ease;
+  background: var(--surface);
+}
+
+.elegant-input:focus {
+  border-color: var(--accent);
+  box-shadow: 0 0 0 0.2rem rgba(0, 105, 92, 0.1);
+}
+
+/* Admin Table Styles */
+.admin-table {
+  border-radius: 12px;
+  overflow: hidden;
+}
+
+.admin-table thead {
+  background: linear-gradient(135deg, var(--accent), var(--accent-light));
+  color: white;
+}
+
+.admin-table th {
+  border: none;
+  padding: 1rem;
+  font-weight: 600;
+  font-size: 0.9rem;
+}
+
+.admin-table td {
+  padding: 1rem;
+  border-color: var(--border);
+  vertical-align: middle;
+}
+
+.admin-table-row:hover {
+  background: rgba(0, 105, 92, 0.03);
+  transition: background 0.2s ease;
+}
+
+/* Text Colors */
+.text-brand {
+  color: var(--brand-500);
+}
+
+.text-dark-custom {
+  color: var(--text-dark);
+}
+
+.text-light-custom {
+  color: var(--text-light);
+}
+
+/* Loading States */
+.spinner-border.text-accent {
+  color: var(--accent) !important;
+}
+
+/* Form Controls - Professional Style */
+.form-check-input:checked {
+  background-color: var(--accent);
+  border-color: var(--accent);
+}
+
+.form-check-input:focus {
+  border-color: var(--accent);
+  box-shadow: 0 0 0 0.2rem rgba(0, 105, 92, 0.25);
+}
+
+/* Badge Styles */
+.badge {
+  font-weight: 500;
+  padding: 0.35em 0.65em;
+}
+
+/* Button Group Styles */
+.btn-group .btn {
+  border-radius: 6px;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .admin-header .container-fluid {
+    padding: 1rem;
+  }
+  
+  .admin-table {
+    font-size: 0.875rem;
+  }
+  
+  .admin-table th,
+  .admin-table td {
+    padding: 0.75rem 0.5rem;
+  }
+
+  .admin-service-card {
+    margin-bottom: 1rem;
+  }
+}
+
+/* Glass Card Effect for Forms */
+.glass-card {
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+}
+
+/* Elegant Header */
+.elegant-header {
+  background: linear-gradient(135deg, var(--brand-500), var(--brand-700));
+  color: white;
+  padding: 1.25rem 1.5rem;
+}

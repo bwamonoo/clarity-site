@@ -1,0 +1,110 @@
+/* ========== Hero Section (Full Width) ========== */
+.hero-bg {
+  background-image: url('https://images.unsplash.com/photo-1732046801426-f32529468176?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxhYnN0cmFjdCUyMG1lZGljYWwlMjBiYWNrZ3JvdW5kfGVufDF8fHx8MTc1ODQ3NTU2N3ww&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  position: relative;
+  width: 100%;
+  max-width: 100%;
+}
+
+.hero-bg .container-fluid,
+.hero-bg .container {
+  max-width: 100%;
+  padding-left: 0;
+  padding-right: 0;
+}
+
+.hero-overlay {
+  background: linear-gradient(135deg, 
+              rgba(248, 250, 252, 0.95), 
+              rgba(248, 250, 252, 0.90), 
+              rgba(248, 250, 252, 0.95));
+  backdrop-filter: blur(2px);
+}
+
+.pattern-overlay {
+  background: radial-gradient(circle at 25% 25%, var(--accent) 0%, transparent 50%),
+              radial-gradient(circle at 75% 75%, var(--brand-500) 0%, transparent 50%);
+  opacity: 0.3;
+}
+
+/* Stats cards */
+.stat-card {
+  background: rgba(255, 255, 255, 0.2);
+  backdrop-filter: blur(16px);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  transition: all 0.3s ease;
+}
+
+.stat-card:hover {
+  background: rgba(255, 255, 255, 0.3);
+  transform: translateY(-5px);
+}
+
+/* Icon gradients */
+.icon-gradient-accent {
+  background: linear-gradient(135deg, var(--accent), var(--accent-light));
+}
+
+.icon-gradient-brand {
+  background: linear-gradient(135deg, var(--brand-500), var(--brand-300));
+}
+
+/* Shadow effects */
+.shadow-custom { box-shadow: 0 20px 60px rgba(0, 0, 0, 0.1); }
+.shadow-custom-lg { box-shadow: 0 25px 80px rgba(0, 0, 0, 0.15); }
+
+/* Slideshow container */
+.slideshow-wrapper { height: 600px; }
+
+@media (min-width: 992px) {
+  .slideshow-wrapper { height: 700px; }
+}
+
+/* Slideshow elements */
+.slideshow-container { border-radius: 1.5rem; }
+
+.slide-btn {
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(16px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  opacity: 0;
+  transition: all 0.3s ease;
+}
+
+.group:hover .slide-btn { opacity: 1; }
+.slide-btn:hover { background: rgba(255, 255, 255, 0.2); }
+
+.slide-indicator {
+  width: 12px;
+  height: 12px;
+  transition: all 0.3s ease;
+}
+
+.slide-indicator.active {
+  background: white;
+  transform: scale(1.1);
+}
+
+.slide-indicator:not(.active) {
+  background: rgba(255, 255, 255, 0.5);
+}
+
+.slide-indicator:hover:not(.active) {
+  background: rgba(255, 255, 255, 0.75);
+}
+
+/* Mobile responsiveness for hero */
+@media (max-width: 576px) {
+  /* Stack buttons vertically on mobile */
+  .hero-buttons-container {
+    flex-direction: column;
+  }
+  
+  .hero-buttons-container .btn {
+    width: 100%;
+    margin-bottom: 0.5rem;
+  }
+}

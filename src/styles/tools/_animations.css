@@ -1,0 +1,86 @@
+@keyframes float {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-10px); }
+}
+
+@keyframes float-icon {
+  0%, 100% { transform: translateY(0px) rotate(0deg); }
+  50% { transform: translateY(-15px) rotate(5deg); }
+}
+
+@keyframes expand {
+  from { width: 0; }
+  to { width: 100%; }
+}
+
+@keyframes scroll-wheel {
+  0% { opacity: 1; transform: translate(-50%, 0); }
+  100% { opacity: 0; transform: translate(-50%, 12px); }
+}
+
+@keyframes scroll-arrow {
+  0% { opacity: 0; }
+  50% { opacity: 0.5; }
+  100% { opacity: 0; transform: rotate(45deg) translate(4px, 4px); }
+}
+
+@keyframes modalSlideIn {
+  from {
+    opacity: 0;
+    transform: translateY(-50px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Animated underline */
+.animate-underline {
+  position: relative;
+}
+
+.animate-underline::after {
+  content: '';
+  position: absolute;
+  bottom: 8px;
+  left: 0;
+  height: 8px;
+  background: linear-gradient(135deg, var(--accent), var(--accent-light));
+  border-radius: 4px;
+  animation: expand 1s ease-out 1.2s both;
+}
+
+/* Scroll indicator */
+.scroll-indicator { display: inline-block; }
+
+.mouse {
+  width: 26px;
+  height: 42px;
+  border: 2px solid rgba(255, 255, 255, 0.7);
+  border-radius: 15px;
+  position: relative;
+  margin: 0 auto 8px;
+}
+
+.wheel {
+  width: 4px;
+  height: 8px;
+  background: rgba(255, 255, 255, 0.7);
+  border-radius: 2px;
+  position: absolute;
+  top: 8px;
+  left: 50%;
+  transform: translateX(-50%);
+  animation: scroll-wheel 2s infinite;
+}
+
+.arrow {
+  width: 8px;
+  height: 8px;
+  border-right: 2px solid rgba(255, 255, 255, 0.7);
+  border-bottom: 2px solid rgba(255, 255, 255, 0.7);
+  transform: rotate(45deg);
+  margin: 0 auto;
+  animation: scroll-arrow 2s infinite;
+}

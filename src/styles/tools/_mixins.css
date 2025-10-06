@@ -1,0 +1,22 @@
+/* Mixins for responsive design */
+@mixin respond-to($breakpoint) {
+  @if $breakpoint == sm {
+    @media (min-width: 576px) { @content; }
+  }
+  @if $breakpoint == md {
+    @media (min-width: 768px) { @content; }
+  }
+  @if $breakpoint == lg {
+    @media (min-width: 992px) { @content; }
+  }
+  @if $breakpoint == xl {
+    @media (min-width: 1200px) { @content; }
+  }
+}
+
+/* Mixin for glassmorphism effect */
+@mixin glass($blur: 10px, $opacity: 0.1) {
+  background: rgba(255, 255, 255, $opacity);
+  backdrop-filter: blur($blur);
+  -webkit-backdrop-filter: blur($blur);
+}

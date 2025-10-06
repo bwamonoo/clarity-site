@@ -1,0 +1,79 @@
+/* Display Utilities */
+.d-flex { display: flex; }
+.d-block { display: block; }
+.d-inline-block { display: inline-block; }
+.d-none { display: none; }
+.d-grid { display: grid; }
+
+/* Flex Utilities */
+.flex-column { flex-direction: column; }
+.justify-center { justify-content: center; }
+.justify-between { justify-content: space-between; }
+.align-center { align-items: center; }
+.align-start { align-items: flex-start; }
+
+/* Position Utilities */
+.position-relative { position: relative; }
+.position-absolute { position: absolute; }
+.position-sticky { position: sticky; }
+.position-fixed { position: fixed; }
+
+/* Overflow Utilities */
+.overflow-hidden { overflow: hidden; }
+.overflow-auto { overflow: auto; }
+
+/* Z-index Utilities */
+.z-1 { z-index: 1; }
+.z-10 { z-index: 10; }
+.z-100 { z-index: 100; }
+.z-1000 { z-index: 1000; }
+
+/* Additional Utilities Needed */
+.max-width-720 { max-width: 720px; }
+.bg-opacity-10 { background-opacity: 0.1; }
+.object-fit-cover { object-fit: cover; }
+
+/* Icon Sizes */
+.icon-lg { 
+  width: 80px; 
+  height: 80px; 
+}
+
+/* Component-specific classes */
+.home-page { /* Root container for home page */ }
+
+.services-overview { /* Services section */ }
+
+.why-choose-us { /* Why choose us section */ }
+
+.features-list { /* Features list container */ }
+
+.feature-item { /* Individual feature item */ }
+
+.feature-title { /* Feature title text */ }
+
+.feature-description { /* Feature description text */ }
+
+.cta-buttons { /* CTA buttons container */ }
+
+.service-visual-card { 
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  background: var(--surface);
+  box-shadow: var(--shadow-sm);
+}
+
+.service-visual-icon {
+  width: 80px;
+  height: 80px;
+}
+
+.service-visual-title {
+  font-family: var(--font-family-heading);
+  font-weight: 600;
+  color: var(--text-dark);
+}
+
+.service-visual-description {
+  line-height: 1.6;
+}

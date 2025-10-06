@@ -160,7 +160,7 @@ export default function AppointmentsTab() {
           </div>
         ) : filteredAppointments.length === 0 ? (
           <div className="text-center py-5 text-muted">
-            <i className="bi bi-calendar-x display-4 d-block mb-3 text-light-custom"></i>
+            <i className="bi bi-calendar-x display-4 d-block mb-3" style={{color: 'var(--text-light)'}}></i>
             <h5 className="text-brand">No appointments found</h5>
             <p>Try adjusting your filters</p>
           </div>
@@ -182,7 +182,7 @@ export default function AppointmentsTab() {
                   <tr key={appointment.id} className="admin-table-row-glass">
                     <td className="ps-4">
                       <div>
-                        <strong className="text-brand">{appointment.patient_name}</strong>
+                        <strong className="text-dark">{appointment.patient_name}</strong>
                         {appointment.patient_notes && (
                           <div className="text-muted small mt-1">
                             <i className="bi bi-chat-text me-1 text-accent"></i>
@@ -193,21 +193,21 @@ export default function AppointmentsTab() {
                     </td>
                     <td>
                       <div>
-                        <div className="text-dark-custom">{appointment.service_name}</div>
+                        <div className="text-dark">{appointment.service_name}</div>
                         <small className="text-muted">{appointment.service_duration} mins</small>
                       </div>
                     </td>
                     <td>
                       <div>
-                        <div className="text-dark-custom fw-medium">
+                        <div className="text-dark fw-medium">
                           {new Date(appointment.appointment_date).toLocaleDateString()}
                         </div>
-                        <small className="text-light-custom">{appointment.appointment_time}</small>
+                        <small className="text-muted">{appointment.appointment_time}</small>
                       </div>
                     </td>
                     <td>
-                      <div className="text-dark-custom">{appointment.patient_phone}</div>
-                      <small className="text-light-custom">{appointment.patient_email}</small>
+                      <div className="text-dark">{appointment.patient_phone}</div>
+                      <small className="text-muted">{appointment.patient_email}</small>
                     </td>
                     <td>
                       <StatusBadge status={appointment.status} />

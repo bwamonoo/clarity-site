@@ -1,5 +1,4 @@
-/* src/styles/pages/_admin.css */
-/* Admin Page Background */
+/* Admin Dashboard Styles */
 .admin-dashboard {
   background: linear-gradient(135deg, 
               rgba(248, 250, 252, 0.95), 
@@ -7,31 +6,25 @@
               rgba(248, 250, 252, 0.95));
   position: relative;
   overflow-x: hidden;
+  min-height: 100vh;
 }
 
 .admin-background {
   position: fixed;
   inset: 0;
-  z-index: -1;
+  z-index: 1;
+  pointer-events: none;
 }
 
 .admin-background .background-pattern {
   position: absolute;
   inset: 0;
   background-image: 
-    radial-gradient(circle at 10% 20%, var(--accent-light) 0%, transparent 50%),
-    radial-gradient(circle at 90% 80%, var(--brand-300) 0%, transparent 50%);
-  opacity: 0.05;
+    radial-gradient(circle at 20% 30%, var(--accent-light) 0%, transparent 50%),
+    radial-gradient(circle at 80% 70%, var(--brand-300) 0%, transparent 50%);
+  opacity: 0.1;
 }
 
-/* Loading Page */
-.admin-loading-page {
-  background: linear-gradient(135deg, 
-              rgba(248, 250, 252, 0.95), 
-              rgba(224, 232, 240, 0.9));
-}
-
-/* Floating Elements */
 .floating-elements {
   position: fixed;
   inset: 0;
@@ -39,57 +32,147 @@
   z-index: 1;
 }
 
-.floating-dot {
-  position: absolute;
-  border-radius: 50%;
-  opacity: 0.6;
-  animation: float 6s ease-in-out infinite;
+/* Glass Cards */
+.glass-admin-card {
+  background: rgba(255, 255, 255, 0.25);
+  backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  border-radius: 20px;
+  box-shadow: 
+    0 8px 32px rgba(0, 0, 0, 0.1),
+    inset 0 1px 0 rgba(255, 255, 255, 0.6);
+  position: relative;
+  z-index: 10;
 }
 
-.dot-1 {
-  top: 20%;
-  left: 10%;
-  width: 6px;
-  height: 6px;
-  background: var(--accent-light);
-  animation-delay: 0s;
+.glass-card-header {
+  background: rgba(255, 255, 255, 0.2);
+  backdrop-filter: blur(10px);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.3);
+  border-radius: 20px 20px 0 0;
+  padding: 1.5rem 2rem;
 }
 
-.dot-2 {
-  top: 70%;
-  right: 15%;
-  width: 5px;
-  height: 5px;
-  background: var(--brand-300);
-  animation-delay: 2s;
+.glass-card-body {
+  padding: 2rem;
 }
 
-.dot-3 {
-  bottom: 30%;
-  left: 20%;
-  width: 4px;
-  height: 4px;
-  background: var(--accent);
-  animation-delay: 4s;
+.glass-card-title {
+  font-size: 1.3rem;
+  font-weight: 600;
+  color: var(--text-dark);
+  margin-bottom: 0.25rem;
 }
 
-@keyframes float {
-  0%, 100% {
-    transform: translateY(0) scale(1);
-    opacity: 0.6;
-  }
-  50% {
-    transform: translateY(-15px) scale(1.05);
-    opacity: 0.8;
-  }
+.glass-card-subtitle {
+  color: var(--text-light);
+  margin-bottom: 0;
+  font-size: 0.9rem;
 }
 
-/* Glass Header */
+/* Sidebar */
+.glass-sidebar-card {
+  background: rgba(255, 255, 255, 0.25);
+  backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  border-radius: 20px;
+  box-shadow: 
+    0 8px 32px rgba(0, 0, 0, 0.1),
+    inset 0 1px 0 rgba(255, 255, 255, 0.6);
+  overflow: hidden;
+  position: relative;
+  z-index: 100;
+}
+
+.sidebar-header {
+  background: linear-gradient(135deg, var(--accent), var(--accent-light));
+  padding: 1.5rem;
+  color: white;
+}
+
+.sidebar-body {
+  padding: 1rem;
+}
+
+.sidebar-body .nav {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.sidebar-nav-link {
+  background: transparent;
+  border: none;
+  border-radius: 12px;
+  color: var(--text-dark);
+  text-decoration: none;
+  transition: all 0.3s ease;
+  font-weight: 500;
+  position: relative;
+  z-index: 101;
+  cursor: pointer;
+  width: 100%;
+  text-align: left;
+  display: flex;
+  align-items: center;
+  padding: 0.75rem 1rem;
+  min-height: 44px;
+}
+
+.sidebar-nav-link i {
+  width: 20px;
+  text-align: center;
+  margin-right: 0.75rem;
+  flex-shrink: 0;
+}
+
+.sidebar-nav-link span {
+  flex: 1;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  font-size: 0.9rem;
+}
+
+.sidebar-nav-link:hover {
+  background: rgba(255, 255, 255, 0.4);
+  transform: translateX(5px);
+}
+
+.sidebar-nav-active {
+  background: rgba(0, 105, 92, 0.1);
+  color: var(--accent);
+  border-left: 3px solid var(--accent);
+}
+
+.sidebar-nav-logout {
+  color: #dc2626;
+  margin-top: 1rem !important;
+  border-left: 3px solid transparent;
+}
+
+.sidebar-nav-logout:hover {
+  background: rgba(220, 38, 38, 0.1);
+  color: #b91c1c;
+  border-left-color: #fecaca;
+  transform: translateX(5px);
+}
+
+.sidebar-nav-logout:active,
+.sidebar-nav-logout:focus {
+  background: rgba(220, 38, 38, 0.2);
+  color: #991b1b;
+  border-left-color: #dc2626;
+}
+
+/* Header */
 .admin-header-glass {
-  background: rgba(255, 255, 255, 0.15);
+  background: rgba(255, 255, 255, 0.25);
   backdrop-filter: blur(20px);
   border-bottom: 1px solid rgba(255, 255, 255, 0.3);
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+  position: relative;
+  z-index: 100;
 }
 
 .admin-header-logo {
@@ -100,12 +183,8 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  box-shadow: 0 4px 15px rgba(0, 105, 92, 0.3);
-}
-
-.admin-header-logo i {
-  font-size: 1.5rem;
   color: white;
+  font-size: 1.5rem;
 }
 
 .admin-header-title {
@@ -121,105 +200,60 @@
   font-size: 0.9rem;
 }
 
-.admin-user-name {
-  font-weight: 600;
+.btn-glass-admin {
+  background: rgba(255, 255, 255, 0.3);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.4);
+  border-radius: 12px;
   color: var(--text-dark);
-}
-
-.admin-user-info {
-  color: var(--text-light);
-  font-size: 0.8rem;
-}
-
-/* Glass Sidebar */
-.glass-sidebar-card {
-  background: rgba(255, 255, 255, 0.2);
-  backdrop-filter: blur(20px);
-  border: 1px solid rgba(255, 255, 255, 0.3);
-  border-radius: 16px;
-  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
-  overflow: hidden;
-}
-
-.sidebar-header {
-  background: linear-gradient(135deg, var(--brand-500), var(--brand-700));
-  color: white;
-  padding: 1.25rem 1.5rem;
-}
-
-.sidebar-body {
-  padding: 1rem;
-}
-
-.sidebar-nav-link {
-  border: none;
-  background: transparent;
-  border-radius: 10px;
+  padding: 0.5rem 1rem;
   transition: all 0.3s ease;
-  color: var(--text-dark);
-  text-decoration: none;
-  width: 100%;
 }
 
-.sidebar-nav-active {
-  background: linear-gradient(135deg, var(--accent), var(--accent-light));
-  color: white;
-  box-shadow: 0 4px 15px rgba(0, 105, 92, 0.3);
+.btn-glass-admin:hover {
+  background: rgba(255, 255, 255, 0.5);
+  transform: translateY(-2px);
 }
 
-.sidebar-nav-inactive {
-  background: rgba(255, 255, 255, 0.6);
-}
-
-.sidebar-nav-inactive:hover {
-  background: rgba(255, 255, 255, 0.8);
-  transform: translateX(4px);
-}
-
-.sidebar-nav-logout {
-  background: rgba(239, 68, 68, 0.1);
-  color: #dc2626;
-}
-
-.sidebar-nav-logout:hover {
-  background: rgba(239, 68, 68, 0.2);
-}
-
-/* Glass Cards */
-.glass-admin-card {
-  background: rgba(255, 255, 255, 0.2);
+.glass-dropdown {
+  background: rgba(255, 255, 255, 0.9);
   backdrop-filter: blur(20px);
   border: 1px solid rgba(255, 255, 255, 0.3);
-  border-radius: 16px;
+  border-radius: 12px;
   box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
-  overflow: hidden;
 }
 
-.glass-card-header {
-  background: linear-gradient(135deg, var(--brand-500), var(--brand-700));
-  color: white;
-  padding: 1.25rem 1.5rem;
+/* Form Elements - FIXED INPUT VISIBILITY */
+.form-select-glass,
+.elegant-input {
+  background: rgba(255, 255, 255, 0.8);
+  border: 2px solid rgba(255, 255, 255, 0.5);
+  border-radius: 10px;
+  padding: 0.75rem; /* Reduced padding to show more text */
+  font-size: 0.95rem;
+  transition: all 0.3s ease;
+  backdrop-filter: blur(10px);
+  width: 100%;
+  box-sizing: border-box; /* Ensure padding doesn't affect total width */
+  min-height: 48px; /* Consistent height */
 }
 
-.glass-card-title {
-  font-size: 1.25rem;
-  font-weight: 600;
-  margin-bottom: 0.25rem;
-  color: white;
-}
-
-.glass-card-subtitle {
-  color: rgba(255, 255, 255, 0.8);
-  margin-bottom: 0;
+/* Specific fix for time inputs and selects in schedule */
+.schedule-list .elegant-input,
+.schedule-list .form-select-glass {
+  padding: 0.6rem 0.75rem; /* Even less padding for schedule inputs */
   font-size: 0.9rem;
+  height: 42px; /* Fixed height for consistency */
 }
 
-.glass-card-body {
-  padding: 1.5rem;
-  background: rgba(255, 255, 255, 0.1);
+.elegant-input:focus,
+.form-select-glass:focus {
+  outline: none;
+  border-color: var(--accent);
+  background: rgba(255, 255, 255, 0.95);
+  box-shadow: 0 0 0 3px rgba(0, 105, 92, 0.1);
 }
 
-/* Glass Form Elements */
 .form-label-glass {
   display: block;
   margin-bottom: 0.4rem;
@@ -228,104 +262,22 @@
   font-size: 0.85rem;
 }
 
-.form-select-glass {
-  background: rgba(255, 255, 255, 0.8);
-  border: 2px solid rgba(255, 255, 255, 0.5);
-  border-radius: 8px;
-  padding: 0.5rem 1rem;
-  transition: all 0.3s ease;
-  backdrop-filter: blur(10px);
-}
-
-.form-select-glass:focus {
-  outline: none;
-  border-color: var(--accent);
-  background: rgba(255, 255, 255, 0.95);
-  box-shadow: 0 0 0 3px rgba(0, 105, 92, 0.1);
-}
-
-/* Glass Buttons */
-.btn-glass-admin {
-  background: rgba(255, 255, 255, 0.2);
-  backdrop-filter: blur(10px);
-  border: 1px solid rgba(255, 255, 255, 0.3);
-  color: var(--text-dark);
-  border-radius: 8px;
-  padding: 0.5rem 1rem;
-  transition: all 0.3s ease;
-}
-
-.btn-glass-admin:hover {
-  background: rgba(255, 255, 255, 0.3);
-  transform: translateY(-1px);
-}
-
 .btn-glass-icon {
-  background: rgba(255, 255, 255, 0.2);
+  background: rgba(255, 255, 255, 0.3);
   backdrop-filter: blur(10px);
-  border: 1px solid rgba(255, 255, 255, 0.3);
+  border: 1px solid rgba(255, 255, 255, 0.4);
+  border-radius: 10px;
   color: var(--text-dark);
-  border-radius: 6px;
-  padding: 0.375rem 0.75rem;
+  padding: 0.5rem;
   transition: all 0.3s ease;
 }
 
 .btn-glass-icon:hover {
-  background: rgba(255, 255, 255, 0.3);
+  background: rgba(255, 255, 255, 0.5);
+  transform: translateY(-2px);
 }
 
-.btn-glass-action {
-  background: rgba(255, 255, 255, 0.2);
-  backdrop-filter: blur(10px);
-  border: 1px solid rgba(255, 255, 255, 0.3);
-  border-radius: 6px;
-  padding: 0.25rem 0.5rem;
-  transition: all 0.3s ease;
-  font-size: 0.875rem;
-}
-
-.btn-glass-action:hover {
-  background: rgba(255, 255, 255, 0.3);
-  transform: translateY(-1px);
-}
-
-/* Glass Badges */
-.badge-glass-warning {
-  background: rgba(245, 158, 11, 0.2);
-  backdrop-filter: blur(10px);
-  border: 1px solid rgba(245, 158, 11, 0.3);
-  color: #92400e;
-}
-
-.badge-glass-success {
-  background: rgba(16, 185, 129, 0.2);
-  backdrop-filter: blur(10px);
-  border: 1px solid rgba(16, 185, 129, 0.3);
-  color: #065f46;
-}
-
-.badge-glass-info {
-  background: rgba(59, 130, 246, 0.2);
-  backdrop-filter: blur(10px);
-  border: 1px solid rgba(59, 130, 246, 0.3);
-  color: #1e40af;
-}
-
-.badge-glass-danger {
-  background: rgba(239, 68, 68, 0.2);
-  backdrop-filter: blur(10px);
-  border: 1px solid rgba(239, 68, 68, 0.3);
-  color: #991b1b;
-}
-
-.badge-glass-secondary {
-  background: rgba(107, 114, 128, 0.2);
-  backdrop-filter: blur(10px);
-  border: 1px solid rgba(107, 114, 128, 0.3);
-  color: #374151;
-}
-
-/* Glass Table */
+/* Table Styles */
 .admin-table-glass {
   background: rgba(255, 255, 255, 0.1);
   border-radius: 12px;
@@ -333,104 +285,231 @@
 }
 
 .admin-table-glass thead {
-  background: linear-gradient(135deg, var(--accent), var(--accent-light));
-  color: white;
+  background: rgba(255, 255, 255, 0.3);
+  backdrop-filter: blur(10px);
 }
 
-.admin-table-glass th {
+.admin-table-glass thead th {
   border: none;
   padding: 1rem;
   font-weight: 600;
+  color: var(--text-dark);
   font-size: 0.9rem;
-  background: rgba(0, 105, 92, 0.8);
 }
 
-.admin-table-glass td {
-  padding: 1rem;
-  border-color: rgba(255, 255, 255, 0.2);
-  vertical-align: middle;
-  background: rgba(255, 255, 255, 0.05);
-}
-
-.admin-table-row-glass:hover td {
+.admin-table-row-glass {
   background: rgba(255, 255, 255, 0.1);
-  transition: background 0.2s ease;
+  transition: all 0.3s ease;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.2);
 }
 
-/* Glass Alerts */
+.admin-table-row-glass:hover {
+  background: rgba(255, 255, 255, 0.2);
+  transform: translateX(5px);
+}
+
+.admin-table-row-glass td {
+  padding: 1rem;
+  border: none;
+  vertical-align: middle;
+}
+
+/* Badge Styles */
+.badge-glass-warning {
+  background: rgba(245, 158, 11, 0.2);
+  color: #92400e;
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(245, 158, 11, 0.3);
+}
+
+.badge-glass-success {
+  background: rgba(16, 185, 129, 0.2);
+  color: #065f46;
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(16, 185, 129, 0.3);
+}
+
+.badge-glass-info {
+  background: rgba(6, 182, 212, 0.2);
+  color: #155e75;
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(6, 182, 212, 0.3);
+}
+
+.badge-glass-danger {
+  background: rgba(239, 68, 68, 0.2);
+  color: #991b1b;
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(239, 68, 68, 0.3);
+}
+
+.badge-glass-secondary {
+  background: rgba(107, 114, 128, 0.2);
+  color: #374151;
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(107, 114, 128, 0.3);
+}
+
+/* Action Buttons */
+.btn-glass-action {
+  background: rgba(255, 255, 255, 0.3);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.4);
+  border-radius: 8px;
+  padding: 0.4rem 0.6rem;
+  font-size: 0.8rem;
+  transition: all 0.3s ease;
+}
+
+.btn-glass-action:hover {
+  background: rgba(255, 255, 255, 0.5);
+  transform: translateY(-2px);
+}
+
+/* Alert Styles */
 .alert-glass-error {
   background: rgba(239, 68, 68, 0.1);
   backdrop-filter: blur(10px);
   border: 1px solid rgba(239, 68, 68, 0.2);
-  border-radius: 12px;
-  padding: 1rem 1.5rem;
+  border-radius: 10px;
+  padding: 0.8rem 1.2rem;
   color: #dc2626;
   font-weight: 500;
+  font-size: 0.9rem;
 }
 
 .alert-glass-success {
   background: rgba(16, 185, 129, 0.1);
   backdrop-filter: blur(10px);
   border: 1px solid rgba(16, 185, 129, 0.2);
-  border-radius: 12px;
-  padding: 1rem 1.5rem;
+  border-radius: 10px;
+  padding: 0.8rem 1.2rem;
   color: #065f46;
   font-weight: 500;
+  font-size: 0.9rem;
 }
 
-/* Glass Dropdown */
-.glass-dropdown {
-  background: rgba(255, 255, 255, 0.2);
-  backdrop-filter: blur(20px);
-  border: 1px solid rgba(255, 255, 255, 0.3);
+/* Loading State */
+.admin-loading-page {
+  background: linear-gradient(135deg, 
+              rgba(248, 250, 252, 0.95), 
+              rgba(224, 232, 240, 0.9), 
+              rgba(248, 250, 252, 0.95));
+}
+
+/* Service Cards - Original Style */
+.service-card {
+  background: white;
   border-radius: 12px;
-  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease;
+  border: 1px solid rgba(0, 0, 0, 0.08);
 }
 
-.glass-dropdown .dropdown-item {
-  padding: 0.5rem 1rem;
-  color: var(--text-dark);
-  transition: all 0.2s ease;
+.service-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
 }
 
-.glass-dropdown .dropdown-item:hover {
-  background: rgba(255, 255, 255, 0.3);
+.service-icon {
+  background: rgba(0, 105, 92, 0.1);
+  border-radius: 12px;
+  padding: 0.75rem;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Button styles for service cards */
+.btn-outline-primary {
+  border-color: var(--accent);
+  color: var(--accent);
+}
+
+.btn-outline-primary:hover {
+  background-color: var(--accent);
+  border-color: var(--accent);
+  color: white;
+}
+
+.btn-outline-danger {
+  border-color: #dc3545;
+  color: #dc3545;
+}
+
+.btn-outline-danger:hover {
+  background-color: #dc3545;
+  border-color: #dc3545;
+  color: white;
+}
+
+/* Main action button */
+.elegant-btn {
+  background: linear-gradient(135deg, var(--accent), var(--accent-light));
+  border: none;
+  color: white;
+  padding: 0.8rem 1.5rem;
+  border-radius: 10px;
+  font-weight: 600;
+  font-size: 0.9rem;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 12px rgba(0, 105, 92, 0.3);
+}
+
+.elegant-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(0, 105, 92, 0.4);
+}
+
+/* Badge styles for service cards */
+.badge.bg-success {
+  background-color: #198754 !important;
+}
+
+.badge.bg-secondary {
+  background-color: #6c757d !important;
+}
+
+.badge.bg-light {
+  background-color: #f8f9fa !important;
+  color: #212529 !important;
+  border: 1px solid #dee2e6 !important;
 }
 
 /* Responsive Design */
 @media (max-width: 768px) {
-  .admin-header .container-fluid {
-    padding: 1rem;
+  .glass-card-body {
+    padding: 1.5rem 1rem;
   }
   
-  .admin-table-glass {
-    font-size: 0.875rem;
+  .glass-card-header {
+    padding: 1.2rem 1.5rem;
   }
   
-  .admin-table-glass th,
-  .admin-table-glass td {
-    padding: 0.75rem 0.5rem;
+  .admin-header-title {
+    font-size: 1.2rem;
   }
-
-  .glass-sidebar-card {
-    margin-bottom: 1rem;
+  
+  .sidebar-header {
+    padding: 1.2rem;
+  }
+  
+  /* Adjust form inputs on mobile */
+  .elegant-input,
+  .form-select-glass {
+    padding: 0.6rem 0.5rem;
+    font-size: 0.85rem;
+  }
+  
+  .schedule-list .elegant-input,
+  .schedule-list .form-select-glass {
+    padding: 0.5rem;
+    font-size: 0.8rem;
+    height: 38px;
   }
 }
 
-/* Text Colors */
-.text-brand {
-  color: var(--brand-500);
-}
-
-.text-dark-custom {
-  color: var(--text-dark);
-}
-
-.text-light-custom {
-  color: var(--text-light);
-}
-
-/* Loading States */
-.spinner-border.text-accent {
-  color: var(--accent) !important;
+/* Container for content should be above background */
+.container-fluid.py-4.px-4 {
+  position: relative;
+  z-index: 10;
 }

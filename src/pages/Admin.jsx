@@ -65,7 +65,7 @@ export default function Admin() {
   if (loading) {
     return (
       <div className="admin-loading-page min-vh-100 d-flex align-items-center justify-content-center">
-        <div className="spinner-border text-accent"></div>
+        <div className="spinner-border text-accent" style={{width: '3rem', height: '3rem'}}></div>
       </div>
     )
   }
@@ -91,28 +91,33 @@ export default function Admin() {
       <AdminHeader activeTab={activeTab} onLogout={handleLogout} />
       
       {/* Messages */}
-      <div className="container-fluid mt-3">
-        {error && (
-          <div className="alert alert-glass-error alert-dismissible fade show" role="alert">
-            <i className="bi bi-exclamation-triangle-fill me-2"></i>
-            {error}
-            <button type="button" className="btn-close" onClick={clearMessages}></button>
+      <div className="container-fluid mt-3 px-4">
+        <div className="row justify-content-center">
+          <div className="col-12 col-xl-10">
+            {error && (
+              <div className="alert alert-glass-error alert-dismissible fade show" role="alert">
+                <i className="bi bi-exclamation-triangle-fill me-2"></i>
+                {error}
+                <button type="button" className="btn-close" onClick={clearMessages}></button>
+              </div>
+            )}
+            
+            {success && (
+              <div className="alert alert-glass-success alert-dismissible fade show" role="alert">
+                <i className="bi bi-check-circle-fill me-2"></i>
+                {success}
+                <button type="button" className="btn-close" onClick={clearMessages}></button>
+              </div>
+            )}
           </div>
-        )}
-        
-        {success && (
-          <div className="alert alert-glass-success alert-dismissible fade show" role="alert">
-            <i className="bi bi-check-circle-fill me-2"></i>
-            {success}
-            <button type="button" className="btn-close" onClick={clearMessages}></button>
-          </div>
-        )}
+        </div>
       </div>
 
-      <div className="container-fluid py-4">
-        <div className="row">
+      <div className="container-fluid py-4 px-4">
+        <div className="row justify-content-center">
           {/* Sidebar Navigation */}
-          <div className="col-md-3 col-lg-2 mb-4">
+
+          <div className="col-md-3 col-lg-2 mb-4" style={{position: 'relative', zIndex: 100}}>
             <div className="glass-sidebar-card">
               <div className="sidebar-header">
                 <h6 className="mb-0 text-white">
@@ -125,23 +130,25 @@ export default function Admin() {
                   {tabs.map(tab => (
                     <button
                       key={tab.id}
-                      className={`sidebar-nav-link text-start d-flex align-items-center py-3 px-3 mb-2 ${
+                      className={`sidebar-nav-link text-start d-flex align-items-center ${
                         activeTab === tab.id 
                           ? 'sidebar-nav-active' 
                           : 'sidebar-nav-inactive'
                       }`}
                       onClick={() => handleTabChange(tab.id)}
+                      style={{cursor: 'pointer'}}
                     >
-                      <i className={`bi ${tab.icon} me-3`}></i>
-                      {tab.name}
+                      <i className={`bi ${tab.icon}`}></i>
+                      <span>{tab.name}</span>
                     </button>
                   ))}
                   <button
-                    className="sidebar-nav-link text-start d-flex align-items-center py-3 px-3 mb-2 sidebar-nav-logout"
+                    className="sidebar-nav-link text-start d-flex align-items-center sidebar-nav-logout"
                     onClick={handleLogout}
+                    style={{cursor: 'pointer'}}
                   >
-                    <i className="bi bi-box-arrow-right me-3"></i>
-                    Logout
+                    <i className="bi bi-box-arrow-right"></i>
+                    <span>Logout</span>
                   </button>
                 </nav>
               </div>

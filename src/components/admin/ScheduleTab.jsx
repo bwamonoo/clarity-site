@@ -61,23 +61,23 @@ export default function ScheduleTab() {
   }
 
   return (
-    <div className="card elegant-card border-0">
-      <div className="elegant-header">
+    <div className="glass-admin-card">
+      <div className="glass-card-header">
         <div className="d-flex justify-content-between align-items-center">
           <div>
-            <h5 className="card-title mb-1 text-white">Clinic Schedule</h5>
-            <p className="text-white-50 mb-0">Set your clinic operating hours</p>
+            <h5 className="glass-card-title">Clinic Schedule</h5>
+            <p className="glass-card-subtitle">Set your clinic operating hours</p>
           </div>
           <div className="d-flex gap-2">
             <button
-              className="btn btn-outline-light"
+              className="btn btn-glass-admin"
               onClick={handleReset}
             >
               <i className="bi bi-arrow-clockwise me-2"></i>
               Reset
             </button>
             <button
-              className="btn btn-light elegant-btn"
+              className="btn elegant-btn"
               onClick={handleSaveSchedule}
               disabled={saving || loading}
             >
@@ -97,7 +97,7 @@ export default function ScheduleTab() {
         </div>
       </div>
 
-      <div className="card-body">
+      <div className="glass-card-body">
         {loading ? (
           <div className="text-center py-5">
             <div className="spinner-border text-accent" role="status">
@@ -110,8 +110,8 @@ export default function ScheduleTab() {
             <div className="col-lg-8">
               <div className="schedule-list">
                 {scheduleData.map(day => (
-                  <div key={day.weekday} className="card mb-3 glass-card border-0">
-                    <div className="card-body">
+                  <div key={day.weekday} className="glass-admin-card mb-3 border-0">
+                    <div className="glass-card-body">
                       <div className="row align-items-center">
                         <div className="col-md-3">
                           <div className="form-check form-switch">
@@ -122,7 +122,7 @@ export default function ScheduleTab() {
                               onChange={(e) => handleScheduleChange(day.weekday, 'open', e.target.checked)}
                               style={{ transform: 'scale(1.2)' }}
                             />
-                            <label className="form-check-label fw-bold text-brand">
+                            <label className="form-check-label fw-bold text-dark">
                               {day.day_name}
                             </label>
                           </div>
@@ -131,7 +131,7 @@ export default function ScheduleTab() {
                         <div className="col-md-9">
                           <div className="row g-3 align-items-center">
                             <div className="col-sm-4">
-                              <label className="form-label small text-muted mb-1">Start Time</label>
+                              <label className="form-label-glass small mb-1">Start Time</label>
                               <input
                                 type="time"
                                 className="form-control elegant-input"
@@ -141,7 +141,7 @@ export default function ScheduleTab() {
                               />
                             </div>
                             <div className="col-sm-4">
-                              <label className="form-label small text-muted mb-1">End Time</label>
+                              <label className="form-label-glass small mb-1">End Time</label>
                               <input
                                 type="time"
                                 className="form-control elegant-input"
@@ -151,7 +151,7 @@ export default function ScheduleTab() {
                               />
                             </div>
                             <div className="col-sm-4">
-                              <label className="form-label small text-muted mb-1">Slot Duration</label>
+                              <label className="form-label-glass small mb-1">Slot Duration</label>
                               <select
                                 className="form-select elegant-input"
                                 value={day.slot_duration}
@@ -174,9 +174,9 @@ export default function ScheduleTab() {
             </div>
             
             <div className="col-lg-4">
-              <div className="card glass-card border-0">
-                <div className="card-body">
-                  <h6 className="card-title text-brand">
+              <div className="glass-admin-card border-0">
+                <div className="glass-card-body">
+                  <h6 className="card-title text-dark mb-3">
                     <i className="bi bi-info-circle text-accent me-2"></i>
                     Schedule Information
                   </h6>
@@ -203,7 +203,7 @@ export default function ScheduleTab() {
                     </li>
                   </ul>
                   
-                  <div className="mt-4 p-3 bg-light rounded border">
+                  <div className="mt-4 p-3 rounded border" style={{background: 'rgba(255,255,255,0.3)'}}>
                     <h6 className="small text-muted mb-2">Quick Stats</h6>
                     <div className="d-flex justify-content-between mb-2">
                       <span>Open Days:</span>
@@ -213,7 +213,7 @@ export default function ScheduleTab() {
                     </div>
                     <div className="d-flex justify-content-between">
                       <span>Standard Hours:</span>
-                      <strong className="text-brand">9AM - 5PM</strong>
+                      <strong className="text-dark">9AM - 5PM</strong>
                     </div>
                   </div>
                 </div>

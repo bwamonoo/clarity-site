@@ -100,6 +100,13 @@ export default function ServicesTab() {
     }
   }
 
+  // Handle delete
+  const handleDelete = async (serviceId) => {
+    if (window.confirm('Are you sure you want to delete this service?')) {
+      await deleteService(serviceId)
+    }
+  }
+
   // Category options
   const categories = [
     { value: 'diagnostic', label: 'Diagnostic' },
@@ -119,16 +126,16 @@ export default function ServicesTab() {
   ]
 
   return (
-    <div className="card elegant-card border-0">
-      <div className="elegant-header d-flex justify-content-between align-items-center">
+    <div className="glass-admin-card">
+      <div className="glass-card-header d-flex justify-content-between align-items-center">
         <div>
-          <h5 className="card-title mb-1 text-white">Service Management</h5>
-          <p className="text-white-50 mb-0">
+          <h5 className="glass-card-title">Service Management</h5>
+          <p className="glass-card-subtitle">
             {services.length} service(s) available
           </p>
         </div>
         <button
-          className="btn btn-light elegant-btn"
+          className="btn elegant-btn"
           onClick={() => setShowForm(true)}
         >
           <i className="bi bi-plus-circle me-2"></i>
@@ -136,21 +143,21 @@ export default function ServicesTab() {
         </button>
       </div>
 
-      <div className="card-body">
+      <div className="glass-card-body">
         {/* Service Form */}
         {showForm && (
-          <div className="card mb-4 border-accent glass-card">
-            <div className="elegant-header">
+          <div className="glass-admin-card mb-4 border-accent">
+            <div className="glass-card-header">
               <h6 className="mb-0 text-white">
                 <i className={`bi ${editingService ? 'bi-pencil' : 'bi-plus-circle'} me-2`}></i>
                 {editingService ? 'Edit Service' : 'Add New Service'}
               </h6>
             </div>
-            <div className="card-body">
+            <div className="glass-card-body">
               <form onSubmit={handleSubmit}>
                 <div className="row g-3">
                   <div className="col-md-6">
-                    <label className="form-label fw-semibold">Service Name *</label>
+                    <label className="form-label-glass fw-semibold">Service Name *</label>
                     <input
                       type="text"
                       className="form-control elegant-input"
@@ -162,7 +169,7 @@ export default function ServicesTab() {
                   
                   {/* Category Field - Now with custom option */}
                   <div className="col-md-6">
-                    <label className="form-label fw-semibold">Category</label>
+                    <label className="form-label-glass fw-semibold">Category</label>
                     <select
                       className="form-select elegant-input"
                       value={formData.category}
@@ -193,7 +200,7 @@ export default function ServicesTab() {
 
                   {/* Optional Price Field */}
                   <div className="col-md-6">
-                    <label className="form-label fw-semibold">
+                    <label className="form-label-glass fw-semibold">
                       Price ($) 
                       <span className="text-muted fw-normal"> - Optional</span>
                     </label>
@@ -212,7 +219,7 @@ export default function ServicesTab() {
                   </div>
 
                   <div className="col-md-6">
-                    <label className="form-label fw-semibold">Duration (minutes) *</label>
+                    <label className="form-label-glass fw-semibold">Duration (minutes) *</label>
                     <input
                       type="number"
                       className="form-control elegant-input"
@@ -224,7 +231,7 @@ export default function ServicesTab() {
                   </div>
 
                   <div className="col-12">
-                    <label className="form-label fw-semibold">Short Description</label>
+                    <label className="form-label-glass fw-semibold">Short Description</label>
                     <input
                       type="text"
                       className="form-control elegant-input"
@@ -235,7 +242,7 @@ export default function ServicesTab() {
                   </div>
 
                   <div className="col-12">
-                    <label className="form-label fw-semibold">Full Description</label>
+                    <label className="form-label-glass fw-semibold">Full Description</label>
                     <textarea
                       className="form-control elegant-input"
                       rows="3"
@@ -245,7 +252,7 @@ export default function ServicesTab() {
                   </div>
 
                   <div className="col-md-6">
-                    <label className="form-label fw-semibold">Icon</label>
+                    <label className="form-label-glass fw-semibold">Icon</label>
                     <select
                       className="form-select elegant-input"
                       value={formData.icon}
@@ -261,7 +268,7 @@ export default function ServicesTab() {
                   </div>
 
                   <div className="col-md-6">
-                    <label className="form-label fw-semibold">Status</label>
+                    <label className="form-label-glass fw-semibold">Status</label>
                     <div className="form-check form-switch mt-2">
                       <input
                         className="form-check-input"
@@ -277,7 +284,7 @@ export default function ServicesTab() {
                 </div>
 
                 <div className="mt-4">
-                  <button type="submit" className="btn btn-gradient-primary me-2" disabled={loading}>
+                  <button type="submit" className="btn elegant-btn me-2" disabled={loading}>
                     {loading ? (
                       <>
                         <span className="spinner-border spinner-border-sm me-2"></span>
@@ -290,7 +297,7 @@ export default function ServicesTab() {
                       </>
                     )}
                   </button>
-                  <button type="button" className="btn btn-outline-accent" onClick={resetForm}>
+                  <button type="button" className="btn btn-glass-admin" onClick={resetForm}>
                     <i className="bi bi-x me-2"></i>
                     Cancel
                   </button>
@@ -310,19 +317,21 @@ export default function ServicesTab() {
           </div>
         ) : services.length === 0 ? (
           <div className="text-center py-5 text-muted">
-            <i className="bi bi-eye-slash display-4 d-block mb-3 text-light-custom"></i>
-            <h5 className="text-brand">No services found</h5>
+            <i className="bi bi-eye-slash display-4 d-block mb-3" style={{color: 'var(--text-light)'}}></i>
+            <h5 className="text-dark">No services found</h5>
             <p>Get started by adding your first service</p>
           </div>
         ) : (
           <div className="row g-4">
             {services.map(service => (
               <div key={service.id} className="col-md-6 col-lg-4">
-                <div className={`admin-service-card card h-100 border-0 shadow-sm ${service.active ? 'border-start border-success border-3' : 'border-start border-secondary border-3'}`}>
+                <div className={`card h-100 border-0 shadow-sm service-card ${
+                  service.active ? 'border-start border-success border-3' : 'border-start border-secondary border-3'
+                }`}>
                   <div className="card-body d-flex flex-column h-100">
                     {/* Header with icon and status */}
                     <div className="d-flex justify-content-between align-items-start mb-3">
-                      <div className="service-icon-admin bg-accent bg-opacity-10 rounded-3 p-2">
+                      <div className="service-icon bg-accent bg-opacity-10 rounded-3 p-2">
                         <i className={`bi ${service.icon} text-accent fs-5`}></i>
                       </div>
                       <div className="d-flex align-items-center gap-2">
@@ -341,7 +350,7 @@ export default function ServicesTab() {
                     </div>
                     
                     {/* Service Title */}
-                    <h6 className="card-title text-brand mb-2">{service.name}</h6>
+                    <h6 className="card-title text-dark mb-2">{service.name}</h6>
                     
                     {/* Service Description */}
                     <p className="card-text text-muted small mb-3 flex-grow-1">
@@ -352,7 +361,7 @@ export default function ServicesTab() {
                     <div className="service-meta mb-3">
                       <div className="d-flex justify-content-between align-items-center">
                         <span className={`fw-bold ${service.price ? 'text-accent' : 'text-muted'}`}>
-                          {service.price ? ` GH₵ ${service.price}` : 'Price on consultation'}
+                          {service.price ? `GH₵ ${service.price}` : 'Price on consultation'}
                         </span>
                         <span className="text-muted small">
                           <i className="bi bi-clock me-1"></i>

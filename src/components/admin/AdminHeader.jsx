@@ -13,7 +13,7 @@ export default function AdminHeader({ activeTab, onLogout }) {
 
   return (
     <header className="admin-header-glass">
-      <div className="container-fluid py-3">
+      <div className="container-fluid py-3 px-4">
         <div className="row align-items-center">
           <div className="col">
             <div className="d-flex align-items-center">
@@ -28,9 +28,9 @@ export default function AdminHeader({ activeTab, onLogout }) {
           </div>
           <div className="col-auto">
             <div className="d-flex align-items-center gap-3">
-              <div className="text-end">
-                <div className="admin-user-name">Admin User</div>
-                <small className="admin-user-info">Last login: Today</small>
+              <div className="text-end d-none d-md-block">
+                <div className="admin-user-name fw-semibold">Admin User</div>
+                <small className="admin-user-info text-muted">Last login: Today</small>
               </div>
               <div className="dropdown">
                 <button 
@@ -38,7 +38,7 @@ export default function AdminHeader({ activeTab, onLogout }) {
                   type="button"
                   data-bs-toggle="dropdown"
                 >
-                  <i className="bi bi-person-circle"></i>
+                  <i className="bi bi-person-circle fs-5"></i>
                 </button>
                 <ul className="dropdown-menu dropdown-menu-end glass-dropdown">
                   <li><a className="dropdown-item" href="#"><i className="bi bi-person me-2"></i>Profile</a></li>

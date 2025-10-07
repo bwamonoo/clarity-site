@@ -1,27 +1,33 @@
-import { useState, useEffect, useCallback } from 'react'
-import { supabase } from '../lib/supabaseClient'
+// src/hooks/useAdmin.js - UPDATED
+import { useState } from 'react'
 
-export const useAdmin = () => {
-  const [activeTab, setActiveTab] = useState('appointments')
-  const [loading, setLoading] = useState(false)
+export function useAdmin() {
+  const [activeTab, setActiveTab] = useState('appointments') // Updated default
   const [error, setError] = useState(null)
   const [success, setSuccess] = useState(null)
 
-  // Clear messages
-  const clearMessages = useCallback(() => {
+  const clearMessages = () => {
     setError(null)
     setSuccess(null)
-  }, [])
+  }
+
+  const setErrorWithClear = (message) => {
+    setError(message)
+    setTimeout(() => setError(null), 5000)
+  }
+
+  const setSuccessWithClear = (message) => {
+    setSuccess(message)
+    setTimeout(() => setSuccess(null), 5000)
+  }
 
   return {
-    // State
     activeTab,
-    loading,
+    setActiveTab,
     error,
     success,
-    
-    // Actions
-    setActiveTab,
-    clearMessages
+    clearMessages,
+    setError: setErrorWithClear,
+    setSuccess: setSuccessWithClear
   }
 }

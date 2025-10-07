@@ -1,10 +1,12 @@
-// src/pages/Admin.jsx
+// src/pages/Admin.jsx - UPDATED
 import React, { useState, useEffect } from 'react'
 import { useAdmin } from '../hooks/useAdmin'
 import AdminHeader from '../components/admin/AdminHeader'
+import DashboardTab from '../components/admin/DashboardTab' // NEW
 import AppointmentsTab from '../components/admin/AppointmentsTab'
 import ServicesTab from '../components/admin/ServicesTab'
 import ScheduleTab from '../components/admin/ScheduleTab'
+import ContactsTab from '../components/admin/ContactsTab'
 import AdminLogin from '../components/AdminLogin'
 import { supabase } from '../lib/supabaseClient'
 
@@ -56,10 +58,13 @@ export default function Admin() {
     setActiveTab(tab)
   }
 
+  // UPDATED: Added Dashboard tab as first item
   const tabs = [
+    { id: 'dashboard', name: 'Dashboard', icon: 'bi-speedometer2' }, // NEW
     { id: 'appointments', name: 'Appointments', icon: 'bi-calendar-check' },
     { id: 'services', name: 'Services', icon: 'bi-eye' },
-    { id: 'schedule', name: 'Schedule', icon: 'bi-clock' }
+    { id: 'schedule', name: 'Schedule', icon: 'bi-clock' },
+    { id: 'contacts', name: 'Contacts', icon: 'bi-chat-dots' }
   ]
 
   if (loading) {
@@ -116,7 +121,6 @@ export default function Admin() {
       <div className="container-fluid py-4 px-4">
         <div className="row justify-content-center">
           {/* Sidebar Navigation */}
-
           <div className="col-md-3 col-lg-2 mb-4" style={{position: 'relative', zIndex: 100}}>
             <div className="glass-sidebar-card">
               <div className="sidebar-header">
@@ -158,9 +162,11 @@ export default function Admin() {
           {/* Main Content */}
           <div className="col-md-9 col-lg-10">
             <div className="admin-content">
+              {activeTab === 'dashboard' && <DashboardTab />} {/* NEW */}
               {activeTab === 'appointments' && <AppointmentsTab />}
               {activeTab === 'services' && <ServicesTab />}
               {activeTab === 'schedule' && <ScheduleTab />}
+              {activeTab === 'contacts' && <ContactsTab />}
             </div>
           </div>
         </div>

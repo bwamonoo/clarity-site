@@ -1,4 +1,3 @@
-/* src/styles/components/_admin-login.css */
 .admin-login-page {
   background: linear-gradient(135deg, 
               rgba(248, 250, 252, 0.95), 
@@ -24,33 +23,33 @@
   opacity: 0.1;
 }
 
-/* Glassmorphic Card - Reduced height */
+/* Glassmorphic Card */
 .glass-login-card {
   background: rgba(255, 255, 255, 0.25);
   backdrop-filter: blur(20px);
   border: 1px solid rgba(255, 255, 255, 0.3);
   border-radius: 20px;
-  padding: 2rem 2rem; /* Reduced from 3rem 2.5rem */
+  padding: 2rem;
   box-shadow: 
     0 8px 32px rgba(0, 0, 0, 0.1),
     inset 0 1px 0 rgba(255, 255, 255, 0.6);
   position: relative;
   z-index: 2;
-  width: 400px; /* Slightly reduced width */
+  width: 400px;
   max-width: 90vw;
 }
 
-/* Logo and Branding - Compact */
+/* Logo and Branding */
 .login-logo {
   display: flex;
   justify-content: center;
 }
 
 .login-logo-icon {
-  width: 60px; /* Reduced from 80px */
-  height: 60px; /* Reduced from 80px */
+  width: 60px;
+  height: 60px;
   background: linear-gradient(135deg, var(--accent), var(--accent-light));
-  border-radius: 16px; /* Slightly smaller radius */
+  border-radius: 16px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -58,64 +57,56 @@
 }
 
 .login-logo-icon i {
-  font-size: 1.8rem; /* Reduced from 2.5rem */
+  font-size: 1.8rem;
   color: white;
 }
 
 .login-brand-text {
-  margin-top: 1rem; /* Reduced from 1.5rem */
+  margin-top: 1rem;
 }
 
 .login-brand-name {
-  font-size: 2rem; /* Reduced from 2.5rem */
+  font-size: 2rem;
   font-weight: 700;
   color: var(--brand-700);
-  letter-spacing: 1.5px; /* Reduced from 2px */
+  letter-spacing: 1.5px;
   margin-bottom: 0.25rem;
 }
 
 .login-brand-subtitle {
-  font-size: 1rem; /* Reduced from 1.1rem */
+  font-size: 1rem;
   color: var(--text-light);
   font-weight: 500;
   margin-bottom: 0;
 }
 
 .login-divider {
-  height: 2px; /* Reduced from 3px */
+  height: 2px;
   background: linear-gradient(90deg, 
               transparent, 
               var(--accent), 
               transparent);
-  width: 80px; /* Reduced from 100px */
-  margin: 1rem auto; /* Reduced from 1.5rem */
+  width: 80px;
+  margin: 1rem auto;
   border-radius: 2px;
 }
 
 .login-title {
-  font-size: 1.3rem; /* Reduced from 1.5rem */
+  font-size: 1.3rem;
   font-weight: 600;
   color: var(--text-dark);
-  margin-bottom: 0.25rem; /* Reduced */
+  margin-bottom: 0.25rem;
 }
 
 .login-subtitle {
   color: var(--text-light);
   margin-bottom: 0;
-  font-size: 0.9rem; /* Slightly smaller */
+  font-size: 0.9rem;
 }
 
-/* Form Styles - Compact */
+/* Form Styles */
 .form-group-glass {
   position: relative;
-}
-
-.form-label-glass {
-  display: block;
-  margin-bottom: 0.4rem; /* Reduced from 0.5rem */
-  font-weight: 600;
-  color: var(--text-dark);
-  font-size: 0.85rem; /* Slightly smaller */
 }
 
 .input-group-glass {
@@ -126,19 +117,19 @@
 
 .input-icon {
   position: absolute;
-  left: 0.9rem; /* Adjusted */
+  left: 0.9rem;
   z-index: 2;
   color: var(--accent);
-  font-size: 1rem; /* Reduced from 1.1rem */
+  font-size: 1rem;
 }
 
 .form-input-glass {
   width: 100%;
-  padding: 0.8rem 0.8rem 0.8rem 2.8rem; /* Reduced padding */
+  padding: 0.8rem 0.8rem 0.8rem 2.8rem;
   background: rgba(255, 255, 255, 0.8);
   border: 2px solid rgba(255, 255, 255, 0.5);
-  border-radius: 10px; /* Slightly smaller */
-  font-size: 0.95rem; /* Slightly smaller */
+  border-radius: 10px;
+  font-size: 0.95rem;
   transition: all 0.3s ease;
   backdrop-filter: blur(10px);
 }
@@ -150,50 +141,26 @@
   box-shadow: 0 0 0 3px rgba(0, 105, 92, 0.1);
 }
 
-/* Login Button - Compact */
-.btn-login-glass {
-  background: linear-gradient(135deg, var(--accent), var(--accent-light));
-  border: none;
-  color: white;
-  padding: 0.9rem 2rem; /* Reduced from 1rem 2rem */
-  border-radius: 10px; /* Slightly smaller */
-  font-weight: 600;
-  font-size: 0.95rem; /* Slightly smaller */
-  transition: all 0.3s ease;
-  box-shadow: 0 4px 12px rgba(0, 105, 92, 0.3);
-}
-
-.btn-login-glass:hover:not(:disabled) {
-  transform: translateY(-2px);
-  box-shadow: 0 6px 20px rgba(0, 105, 92, 0.4);
-}
-
-.btn-login-glass:disabled {
-  opacity: 0.7;
-  cursor: not-allowed;
-  transform: none;
-}
-
-/* Error Alert - Compact */
+/* Error Alert */
 .alert-glass-error {
   background: rgba(239, 68, 68, 0.1);
   backdrop-filter: blur(10px);
   border: 1px solid rgba(239, 68, 68, 0.2);
-  border-radius: 10px; /* Slightly smaller */
-  padding: 0.8rem 1.2rem; /* Reduced */
+  border-radius: 10px;
+  padding: 0.8rem 1.2rem;
   color: #dc2626;
   font-weight: 500;
-  font-size: 0.9rem; /* Slightly smaller */
+  font-size: 0.9rem;
 }
 
 /* Security Note */
 .login-security-note {
-  padding-top: 0.8rem; /* Reduced */
+  padding-top: 0.8rem;
   border-top: 1px solid rgba(255, 255, 255, 0.3);
-  font-size: 0.8rem; /* Slightly smaller */
+  font-size: 0.8rem;
 }
 
-/* Floating Elements - Adjusted positions */
+/* Floating Elements */
 .floating-elements {
   position: absolute;
   inset: 0;
@@ -209,25 +176,25 @@
 }
 
 .dot-1 {
-  top: 15%; /* Adjusted */
+  top: 15%;
   left: 10%;
-  width: 6px; /* Smaller */
+  width: 6px;
   height: 6px;
   background: var(--accent-light);
   animation-delay: 0s;
 }
 
 .dot-2 {
-  top: 65%; /* Adjusted */
+  top: 65%;
   right: 15%;
-  width: 5px; /* Smaller */
+  width: 5px;
   height: 5px;
   background: var(--brand-300);
   animation-delay: 2s;
 }
 
 .dot-3 {
-  bottom: 25%; /* Adjusted */
+  bottom: 25%;
   left: 20%;
   width: 4px;
   height: 4px;
@@ -235,43 +202,26 @@
   animation-delay: 4s;
 }
 
-@keyframes float {
-  0%, 100% {
-    transform: translateY(0) scale(1);
-    opacity: 0.6;
-  }
-  50% {
-    transform: translateY(-15px) scale(1.05); /* Reduced movement */
-    opacity: 0.8;
-  }
-}
-
 /* Responsive Design */
 @media (max-width: 576px) {
   .glass-login-card {
-    padding: 1.5rem 1.2rem; /* Further reduced on mobile */
+    padding: 1.5rem 1.2rem;
   }
 
   .login-brand-name {
-    font-size: 1.8rem; /* Smaller on mobile */
+    font-size: 1.8rem;
   }
 
   .login-logo-icon {
-    width: 50px; /* Smaller on mobile */
+    width: 50px;
     height: 50px;
   }
 
   .login-logo-icon i {
-    font-size: 1.5rem; /* Smaller on mobile */
+    font-size: 1.5rem;
   }
   
   .form-input-glass {
-    padding: 0.7rem 0.7rem 0.7rem 2.5rem; /* Further reduced on mobile */
+    padding: 0.7rem 0.7rem 0.7rem 2.5rem;
   }
-}
-
-/* Loading State Enhancement */
-.spinner-border-sm {
-  width: 1rem;
-  height: 1rem;
 }

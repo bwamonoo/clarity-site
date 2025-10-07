@@ -1,12 +1,14 @@
-// src/components/admin/AdminHeader.jsx
+// src/components/admin/AdminHeader.jsx - UPDATED
 import React from 'react'
 
 export default function AdminHeader({ activeTab, onLogout }) {
   const getTabTitle = (tab) => {
     switch(tab) {
+      case 'dashboard': return 'Dashboard Overview' // NEW
       case 'appointments': return 'Appointment Management'
       case 'services': return 'Service Management'
       case 'schedule': return 'Clinic Schedule'
+      case 'contacts': return 'Contact Messages'
       default: return 'Admin Dashboard'
     }
   }

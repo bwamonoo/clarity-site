@@ -50,3 +50,7 @@
   margin-left: -50vw;
   margin-right: -50vw;
 }
+
+.min-vh-50 {
+  min-height: 50vh;
+}

@@ -1,4 +1,4 @@
-// src/components/booking/ProgressStepper.jsx
+// src/components/booking/ProgressStepper.jsx - OPTIONAL ENHANCEMENT
 import React from 'react'
 
 export default function ProgressStepper({ currentStep }) {
@@ -10,11 +10,11 @@ export default function ProgressStepper({ currentStep }) {
   ]
 
   return (
-    <div className="row justify-content-center mb-5">
+    <div className="row justify-content-center mb-4 mb-md-5">
       <div className="col-md-8">
         <div className="d-flex align-items-center justify-content-center">
           {steps.map((step, index) => (
-            <div key={step.number} className="d-flex align-items-center">
+            <React.Fragment key={step.number}>
               <div className={`stepper-step ${
                 currentStep > step.number ? 'completed' : 
                 currentStep === step.number ? 'active' : 'inactive'
@@ -24,12 +24,18 @@ export default function ProgressStepper({ currentStep }) {
               {index < steps.length - 1 && (
                 <div className={`stepper-line ${currentStep > step.number ? 'completed' : ''}`}></div>
               )}
-            </div>
+            </React.Fragment>
           ))}
         </div>
-        <div className="d-flex justify-content-between mt-3">
+        <div className="d-flex justify-content-between mt-2 mt-md-3">
           {steps.map(step => (
-            <small key={step.number} className="text-center text-muted">{step.label}</small>
+            <small 
+              key={step.number} 
+              className="text-center text-muted"
+              style={{ fontSize: '0.75rem' }}
+            >
+              {step.label}
+            </small>
           ))}
         </div>
       </div>

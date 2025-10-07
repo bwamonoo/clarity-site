@@ -1,3 +1,4 @@
+/* src/styles/tools/_mixins.css */
 /* Mixins for responsive design */
 @mixin respond-to($breakpoint) {
   @if $breakpoint == sm {

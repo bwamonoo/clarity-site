@@ -320,3 +320,100 @@
     grid-template-columns: repeat(3, 1fr);
   }
 }
+
+/* Improved Mobile Calendar Styles */
+@media (max-width: 575px) {
+  .calendar-day {
+    padding: 0.5rem !important;
+    min-height: 60px;
+  }
+  
+  .calendar-day small {
+    font-size: 0.65rem !important;
+    line-height: 1;
+  }
+  
+  .calendar-day strong {
+    font-size: 0.9rem !important;
+    margin: 0.1rem 0;
+  }
+  
+  .time-slot {
+    padding: 0.5rem 0.25rem !important;
+    min-height: 44px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+  
+  .time-slot div:first-child {
+    font-size: 0.8rem !important;
+    line-height: 1.2;
+  }
+}
+
+/* Enhanced hover states */
+.calendar-day {
+  transition: all 0.2s ease;
+  border: 2px solid transparent;
+}
+
+.calendar-day:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.calendar-day.selected {
+  border-color: var(--accent);
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(0, 105, 92, 0.2);
+}
+
+.time-slot {
+  transition: all 0.2s ease;
+  border: 2px solid transparent;
+}
+
+.time-slot:not(.unavailable):hover {
+  transform: translateY(-1px);
+  border-color: var(--accent-light);
+}
+
+.time-slot.selected {
+  border-color: var(--accent);
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(0, 105, 92, 0.2);
+}
+
+/* Better spacing for mobile */
+@media (max-width: 575px) {
+  .glass-card {
+    padding: 1rem !important;
+  }
+  
+  .selected-service-summary {
+    padding: 0.75rem !important;
+  }
+  
+  .selected-service-summary h6 {
+    font-size: 0.9rem;
+  }
+}
+
+/* Improved time slot grid for different screen sizes */
+.time-slot-grid {
+  display: grid;
+  gap: 0.5rem;
+}
+
+@media (max-width: 575px) {
+  .time-slot-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+@media (min-width: 576px) and (max-width: 767px) {
+  .time-slot-grid {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}

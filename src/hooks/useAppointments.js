@@ -1,95 +1,114 @@
-import { useState, useEffect, useCallback } from 'react'
+// src/hooks/useAppointments.js - UPDATED WITH BULK ACTIONS
+import { useState, useEffect } from 'react'
 import { supabase } from '../lib/supabaseClient'
 
-export const useAppointments = () => {
+export function useAppointments() {
   const [appointments, setAppointments] = useState([])
-  const [loading, setLoading] = useState(false)
+  const [loading, setLoading] = useState(true)
   const [error, setError] = useState(null)
 
-  // Load all appointments
-  const loadAppointments = useCallback(async () => {
+  // Fetch appointments from Supabase
+  const fetchAppointments = async () => {
     try {
       setLoading(true)
       setError(null)
 
-      const { data, error } = await supabase
+      const { data, error: supabaseError } = await supabase
         .from('appointments')
-        .select(`
-          *,
-          services (*)
-        `)
+        .select('*')
         .order('appointment_date', { ascending: true })
         .order('appointment_time', { ascending: true })
 
-      if (error) throw error
+      if (supabaseError) throw supabaseError
 
-      const transformedAppointments = data.map(apt => ({
-        id: apt.id,
-        patient_name: apt.patient_name,
-        patient_phone: apt.patient_phone,
-        patient_email: apt.patient_email,
-        patient_notes: apt.patient_notes,
-        service_name: apt.services?.name || 'Unknown Service',
-        service_duration: apt.duration,
-        appointment_date: apt.appointment_date,
-        appointment_time: apt.appointment_time,
-        status: apt.status || 'pending',
-        created_at: apt.created_at
-      }))
-
-      setAppointments(transformedAppointments)
+      setAppointments(data || [])
     } catch (err) {
-      setError(err.message)
-      console.error('Error loading appointments:', err)
+      console.error('Error fetching appointments:', err)
+      setError('Failed to load appointments')
     } finally {
       setLoading(false)
     }
-  }, [])
+  }
 
   // Update appointment status
-  const updateAppointmentStatus = useCallback(async (appointmentId, newStatus) => {
+  const updateAppointmentStatus = async (appointmentId, newStatus) => {
     try {
-      setLoading(true)
       setError(null)
 
-      const { data, error } = await supabase
+      const { error: supabaseError } = await supabase
         .from('appointments')
         .update({ 
           status: newStatus,
           updated_at: new Date().toISOString()
         })
         .eq('id', appointmentId)
-        .select()
 
-      if (error) throw error
+      if (supabaseError) throw supabaseError
 
-      if (!data || data.length === 0) {
-        throw new Error('Appointment not found')
-      }
+      // Update local state
+      setAppointments(prev => prev.map(apt =>
+        apt.id === appointmentId 
+          ? { ...apt, status: newStatus, updated_at: new Date().toISOString() }
+          : apt
+      ))
 
-      // Refresh the list
-      await loadAppointments()
-      
-      return { success: true, message: `Appointment ${newStatus} successfully` }
+      return { success: true }
     } catch (err) {
-      setError(err.message)
-      console.error('Error updating appointment:', err)
-      return { success: false, message: err.message }
-    } finally {
-      setLoading(false)
+      console.error('Error updating appointment status:', err)
+      setError('Failed to update appointment status')
+      return { success: false, error: err.message }
     }
-  }, [loadAppointments])
+  }
 
-  // Load appointments on mount
+  // NEW: Bulk update appointments
+  const bulkUpdateAppointments = async (appointmentIds, newStatus) => {
+    try {
+      setError(null)
+      
+      const { error: supabaseError } = await supabase
+        .from('appointments')
+        .update({ 
+          status: newStatus,
+          updated_at: new Date().toISOString()
+        })
+        .in('id', appointmentIds)
+
+      if (supabaseError) throw supabaseError
+
+      // Update local state
+      setAppointments(prev => prev.map(apt =>
+        appointmentIds.includes(apt.id)
+          ? { ...apt, status: newStatus, updated_at: new Date().toISOString() }
+          : apt
+      ))
+
+      return { 
+        success: true, 
+        message: `Successfully updated ${appointmentIds.length} appointment(s) to ${newStatus}` 
+      }
+    } catch (err) {
+      console.error('Error bulk updating appointments:', err)
+      setError(`Failed to update ${appointmentIds.length} appointment(s)`)
+      return { success: false, error: err.message }
+    }
+  }
+
+  // Refresh appointments
+  const refreshAppointments = () => {
+    fetchAppointments()
+  }
+
+  // Initial fetch
   useEffect(() => {
-    loadAppointments()
-  }, [loadAppointments])
+    fetchAppointments()
+  }, [])
 
   return {
     appointments,
     loading,
     error,
     updateAppointmentStatus,
-    refreshAppointments: loadAppointments
+    bulkUpdateAppointments, // NEW: Export bulk update function
+    refreshAppointments
   }
 }

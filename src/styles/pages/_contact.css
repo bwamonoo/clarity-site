@@ -1,0 +1,264 @@
+/* Contact Page Modern Styles */
+.contact-page-modern {
+  min-height: 100vh;
+  background: linear-gradient(135deg, 
+              rgba(248, 250, 252, 0.95), 
+              rgba(224, 232, 240, 0.9), 
+              rgba(248, 250, 252, 0.95));
+  position: relative;
+  overflow: hidden;
+  padding: 1rem;
+  display: flex;
+  align-items: center;
+}
+
+.contact-background {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+}
+
+.contact-background .background-pattern {
+  position: absolute;
+  inset: 0;
+  background-image: 
+    radial-gradient(circle at 20% 30%, var(--accent-light) 0%, transparent 50%),
+    radial-gradient(circle at 80% 70%, var(--brand-300) 0%, transparent 50%);
+  opacity: 0.1;
+}
+
+/* Glass Contact Card */
+/* .glass-contact-card {
+  background: rgba(255, 255, 255, 0.25);
+  backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  border-radius: 20px;
+  padding: 2.5rem;
+  box-shadow: 
+    0 8px 32px rgba(0, 0, 0, 0.1),
+    inset 0 1px 0 rgba(255, 255, 255, 0.6);
+  position: relative;
+  z-index: 2;
+  max-width: 800px;
+  margin: 0 auto;
+} */
+
+/* Contact Header */
+.contact-header {
+  margin-bottom: 2rem;
+}
+
+.contact-logo {
+  display: flex;
+  justify-content: center;
+}
+
+.contact-logo-icon {
+  width: 70px;
+  height: 70px;
+  background: linear-gradient(135deg, var(--accent), var(--accent-light));
+  border-radius: 18px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 6px 20px rgba(0, 105, 92, 0.3);
+}
+
+.contact-logo-icon i {
+  font-size: 2rem;
+  color: white;
+}
+
+.contact-title {
+  font-size: 2.2rem;
+  font-weight: 700;
+  color: var(--text-dark);
+  margin-bottom: 0.5rem;
+}
+
+.contact-subtitle {
+  font-size: 1.1rem;
+  margin-bottom: 1.5rem;
+}
+
+.contact-divider {
+  height: 3px;
+  background: linear-gradient(90deg, 
+              transparent, 
+              var(--accent), 
+              transparent);
+  width: 100px;
+  margin: 0 auto;
+  border-radius: 2px;
+}
+
+/* Contact Methods */
+.contact-alternative {
+  border-top: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+.contact-method {
+  padding: 1rem;
+  transition: all 0.3s ease;
+}
+
+.contact-method:hover {
+  transform: translateY(-5px);
+}
+
+.contact-method-icon {
+  width: 60px;
+  height: 60px;
+  background: linear-gradient(135deg, var(--accent), var(--accent-light));
+  border-radius: 15px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto;
+  color: white;
+  font-size: 1.5rem;
+}
+
+.contact-method-title {
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--text-dark);
+  margin-bottom: 0.75rem;
+}
+
+.contact-method-info {
+  color: var(--text-light);
+  margin-bottom: 0.25rem;
+  font-size: 0.9rem;
+}
+
+.contact-method a {
+  color: var(--accent);
+  transition: color 0.3s ease;
+}
+
+.contact-method a:hover {
+  color: var(--accent-light);
+}
+
+/* Emergency Contact */
+.emergency-contact {
+  background: rgba(255, 243, 205, 0.3);
+  border: 1px solid rgba(255, 193, 7, 0.2);
+  backdrop-filter: blur(10px);
+}
+
+/* Form Enhancements */
+.form-input-glass {
+  width: 100%;
+  padding: 0.8rem 0.8rem 0.8rem 2.8rem;
+  background: rgba(255, 255, 255, 0.8);
+  border: 2px solid rgba(255, 255, 255, 0.5);
+  border-radius: 10px;
+  font-size: 0.95rem;
+  transition: all 0.3s ease;
+  backdrop-filter: blur(10px);
+}
+
+.form-input-glass:focus {
+  outline: none;
+  border-color: var(--accent);
+  background: rgba(255, 255, 255, 0.95);
+  box-shadow: 0 0 0 3px rgba(0, 105, 92, 0.1);
+}
+
+.form-input-glass::placeholder {
+  color: var(--text-light);
+  opacity: 0.7;
+}
+
+/* Textarea specific styles */
+.form-input-glass[rows] {
+  padding-top: 0.8rem;
+  padding-bottom: 0.8rem;
+}
+
+/* Status Alerts */
+.alert-glass-success {
+  background: rgba(16, 185, 129, 0.1);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(16, 185, 129, 0.2);
+  border-radius: 10px;
+  padding: 0.8rem 1.2rem;
+  color: #065f46;
+  font-weight: 500;
+  font-size: 0.9rem;
+}
+
+.alert-glass-error {
+  background: rgba(239, 68, 68, 0.1);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(239, 68, 68, 0.2);
+  border-radius: 10px;
+  padding: 0.8rem 1.2rem;
+  color: #dc2626;
+  font-weight: 500;
+  font-size: 0.9rem;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .glass-contact-card {
+    padding: 2rem 1.5rem;
+  }
+  
+  .contact-title {
+    font-size: 1.8rem;
+  }
+  
+  .contact-logo-icon {
+    width: 60px;
+    height: 60px;
+  }
+  
+  .contact-logo-icon i {
+    font-size: 1.5rem;
+  }
+  
+  .form-input-glass {
+    padding: 0.7rem 0.7rem 0.7rem 2.5rem;
+  }
+}
+
+@media (max-width: 576px) {
+  .glass-contact-card {
+    padding: 1.5rem 1.2rem;
+  }
+  
+  .contact-title {
+    font-size: 1.6rem;
+  }
+  
+  .contact-method {
+    padding: 0.5rem;
+  }
+  
+  .contact-method-icon {
+    width: 50px;
+    height: 50px;
+    font-size: 1.2rem;
+  }
+}
+
+/* Loading State Enhancement */
+.spinner-border-sm {
+  width: 1rem;
+  height: 1rem;
+}
+
+/* Button hover effects */
+.btn-login-glass:hover:not(:disabled) {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(0, 105, 92, 0.4);
+}
+
+.btn-login-glass:disabled {
+  opacity: 0.7;
+  cursor: not-allowed;
+  transform: none;
+}

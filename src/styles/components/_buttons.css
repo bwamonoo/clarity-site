@@ -1,42 +1,56 @@
-/* Buttons (unified look across the app) */
-.btn-primary, .btn-appointment, .elegant-btn {
-  background: linear-gradient(90deg, var(--accent) 0%, var(--brand-700) 100%);
-  color: #fff; 
-  border: none; 
-  border-radius: 8px;
-  padding: .55rem 1.05rem; 
+/* Unified Button Styles */
+.btn-primary, 
+.btn-appointment, 
+.elegant-btn,
+.btn-login-glass,
+.btn-gradient-primary {
+  background: linear-gradient(135deg, var(--accent), var(--accent-light));
+  border: none;
+  color: white;
+  border-radius: 10px;
   font-weight: 600;
-  box-shadow: 0 4px 10px rgba(26,37,48,0.06);
-  transition: transform var(--transition-fast), box-shadow var(--transition-fast), background var(--transition-fast);
-  display: inline-flex; 
-  align-items: center; 
-  gap: .5rem; 
-  cursor: pointer;
-}
-
-.btn-primary:hover, .btn-appointment:hover, .elegant-btn:hover {
-  background: var(--brand-700);
-  transform: translateY(-2px);
-  box-shadow: 0 8px 20px rgba(26,37,48,0.1);
-}
-
-/* Gradient buttons */
-.btn-gradient-primary { 
-  background: linear-gradient(135deg, var(--accent), var(--accent-light)); 
-  border: none; 
-  color: white; 
   transition: all 0.3s ease;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  cursor: pointer;
+  box-shadow: 0 4px 12px rgba(0, 105, 92, 0.3);
+}
+
+.btn-primary, 
+.btn-appointment {
+  padding: 0.55rem 1.05rem;
+}
+
+.elegant-btn,
+.btn-login-glass {
+  padding: 0.9rem 2rem;
+}
+
+.btn-gradient-primary {
   padding: 0.9rem 1.25rem;
   font-size: 0.9rem;
 }
 
-.btn-gradient-primary:hover { 
+/* Hover States */
+.btn-primary:hover, 
+.btn-appointment:hover, 
+.elegant-btn:hover,
+.btn-login-glass:hover:not(:disabled),
+.btn-gradient-primary:hover {
   background: linear-gradient(135deg, #004d40, var(--accent));
-  transform: scale(1.05);
-  box-shadow: 0 10px 30px rgba(0, 105, 92, 0.3); 
-  color: white; 
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(0, 105, 92, 0.4);
+  color: white;
 }
 
+.btn-login-glass:disabled {
+  opacity: 0.7;
+  cursor: not-allowed;
+  transform: none;
+}
+
+/* Outline Button */
 .btn-outline-accent { 
   border: 2px solid var(--accent); 
   color: var(--accent); 
@@ -50,6 +64,33 @@
 .btn-outline-accent:hover { 
   background: var(--accent); 
   color: white; 
+}
+
+/* Glass Admin Buttons */
+.btn-glass-admin,
+.btn-glass-icon,
+.btn-glass-action {
+  background: rgba(255, 255, 255, 0.3);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.4);
+  border-radius: 12px;
+  color: var(--text-dark);
+  transition: all 0.3s ease;
+}
+
+.btn-glass-admin { padding: 0.5rem 1rem; }
+.btn-glass-icon { padding: 0.5rem; }
+.btn-glass-action { 
+  padding: 0.4rem 0.6rem;
+  font-size: 0.8rem;
+  border-radius: 8px;
+}
+
+.btn-glass-admin:hover,
+.btn-glass-icon:hover,
+.btn-glass-action:hover {
+  background: rgba(255, 255, 255, 0.5);
+  transform: translateY(-2px);
 }
 
 /* Button icon sizes */

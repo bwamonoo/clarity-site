@@ -1,7 +1,9 @@
 import React, { useState } from 'react'
 import { supabase } from '../lib/supabaseClient'
+import { websiteContent } from '../config/content/index'
 
 export default function Contact() {
+  const { clinic } = websiteContent
   const [form, setForm] = useState({ name: '', email: '', phone: '', message: '' })
   const [status, setStatus] = useState(null)
 
@@ -106,7 +108,7 @@ export default function Contact() {
                           name="phone"
                           value={form.phone}
                           onChange={handleChange}
-                          placeholder="(123) 456-7890"
+                          placeholder={clinic.contact.phone.formatted}
                         />
                       </div>
                     </div>
@@ -175,12 +177,18 @@ export default function Contact() {
                       </div>
                       <h6 className="contact-method-title">Call Us</h6>
                       <p className="contact-method-info mb-1">
-                        <a href="tel:+1234567890" className="text-decoration-none">(123) 456-7890</a>
+                        <a href={`tel:${clinic.contact.phone.primary}`} className="text-decoration-none">
+                          {clinic.contact.phone.formatted}
+                        </a>
                       </p>
                       <p className="contact-method-info mb-0">
-                        <a href="tel:+0987654321" className="text-decoration-none">(098) 765-4321</a>
+                        <a href={`tel:${clinic.contact.phone.emergency}`} className="text-decoration-none">
+                          {clinic.contact.phone.emergency} (Emergency)
+                        </a>
                       </p>
-                      <small className="text-muted">Mon-Fri, 8AM-6PM</small>
+                      <small className="text-muted">
+                        {clinic.hours.weekdays}, {clinic.hours.saturday}
+                      </small>
                     </div>
                   </div>
 
@@ -191,10 +199,14 @@ export default function Contact() {
                       </div>
                       <h6 className="contact-method-title">Email Us</h6>
                       <p className="contact-method-info mb-1">
-                        <a href="mailto:info@clinic.com" className="text-decoration-none">info@clinic.com</a>
+                        <a href={`mailto:${clinic.contact.email}`} className="text-decoration-none">
+                          {clinic.contact.email}
+                        </a>
                       </p>
                       <p className="contact-method-info mb-0">
-                        <a href="mailto:support@clinic.com" className="text-decoration-none">support@clinic.com</a>
+                        <a href={`mailto:${clinic.contact.email}`} className="text-decoration-none">
+                          General Inquiries
+                        </a>
                       </p>
                       <small className="text-muted">24/7 Support</small>
                     </div>
@@ -206,8 +218,10 @@ export default function Contact() {
                         <i className="bi bi-geo-alt-fill"></i>
                       </div>
                       <h6 className="contact-method-title">Visit Us</h6>
-                      <p className="contact-method-info mb-1">123 Health Street</p>
-                      <p className="contact-method-info mb-0">Medical District, City 12345</p>
+                      <p className="contact-method-info mb-1">{clinic.contact.address.street}</p>
+                      <p className="contact-method-info mb-0">
+                        {clinic.contact.address.landmark}, {clinic.contact.address.city}
+                      </p>
                       <small className="text-muted">Free Parking Available</small>
                     </div>
                   </div>
@@ -222,10 +236,32 @@ export default function Contact() {
                   <p className="mb-1 small text-muted">
                     For urgent medical concerns, call our emergency line:
                   </p>
-                  <a href="tel:+911" className="btn btn-sm btn-outline-danger mt-1">
+                  <a href={`tel:${clinic.contact.phone.emergency}`} className="btn btn-sm btn-outline-danger mt-1">
                     <i className="bi bi-phone me-1"></i>
-                    Call 911 for Emergencies
+                    Call {clinic.contact.phone.emergency} for Emergencies
                   </a>
+                  <p className="small text-muted mt-2 mb-0">
+                    {clinic.hours.emergency}
+                  </p>
+                </div>
+
+                {/* Social Media Links */}
+                <div className="text-center mt-4">
+                  <h6 className="text-muted mb-3">Follow Us</h6>
+                  <div className="social-links justify-content-center">
+                    {Object.entries(clinic.social).map(([platform, url]) => (
+                      <a
+                        key={platform}
+                        href={url}
+                        className="social-link mx-2"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        aria-label={platform}
+                      >
+                        <i className={`bi bi-${platform}`}></i>
+                      </a>
+                    ))}
+                  </div>
                 </div>
               </div>
             </div>

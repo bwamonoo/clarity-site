@@ -3,7 +3,7 @@ import React from "react";
 import { websiteContent } from "../config/content/index";
 
 export default function About() {
-  const { about } = websiteContent;
+  const { about, clinic } = websiteContent;
 
   return (
     <div className="about-page-modern">
@@ -251,11 +251,11 @@ export default function About() {
                 </div>
                 <h5 className="contact-title mb-3">Location</h5>
                 <p className="contact-info text-muted">
-                  {about.contactInfo.address.street}
+                  {clinic.contact.address.street}
                   <br />
-                  {about.contactInfo.address.city}
+                  {clinic.contact.address.landmark}
                   <br />
-                  {about.contactInfo.address.postal}
+                  {clinic.contact.address.city}, {clinic.contact.address.country}
                 </p>
               </div>
             </div>
@@ -268,9 +268,10 @@ export default function About() {
                 </div>
                 <h5 className="contact-title mb-3">Opening Hours</h5>
                 <div className="contact-info text-muted">
-                  <p className="mb-1">{about.contactInfo.hours.weekdays}</p>
-                  <p className="mb-1">{about.contactInfo.hours.saturday}</p>
-                  <p className="mb-0">{about.contactInfo.hours.sunday}</p>
+                  <p className="mb-1">{clinic.hours.weekdays}</p>
+                  <p className="mb-1">{clinic.hours.saturday}</p>
+                  <p className="mb-1">{clinic.hours.sunday}</p>
+                  <p className="mb-0 text-accent fw-semibold">{clinic.hours.emergency}</p>
                 </div>
               </div>
             </div>
@@ -285,12 +286,71 @@ export default function About() {
                 <div className="contact-info text-muted">
                   <p className="mb-2">
                     <i className="bi bi-phone me-2"></i>
-                    {about.contactInfo.contact.phone}
+                    {clinic.contact.phone.formatted}
+                  </p>
+                  <p className="mb-2">
+                    <i className="bi bi-phone-fill me-2"></i>
+                    {clinic.contact.phone.emergency} (Emergency)
                   </p>
                   <p className="mb-0">
                     <i className="bi bi-envelope me-2"></i>
-                    {about.contactInfo.contact.email}
+                    {clinic.contact.email}
                   </p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          {/* Social Media Links */}
+          <div className="row mt-4">
+            <div className="col-12 text-center">
+              <div className="social-links">
+                {Object.entries(clinic.social).map(([platform, url]) => (
+                  <a
+                    key={platform}
+                    href={url}
+                    className="social-link mx-2"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    aria-label={platform}
+                  >
+                    <i className={`bi bi-${platform}`}></i>
+                  </a>
+                ))}
+              </div>
+            </div>
+          </div>
+
+          {/* Clinic Metadata */}
+          <div className="row mt-5">
+            <div className="col-12">
+              <div className="text-center">
+                <div className="row justify-content-center">
+                  <div className="col-lg-8">
+                    <h5 className="mb-3">About Our Clinic</h5>
+                    <div className="row g-3">
+                      <div className="col-md-6">
+                        <p className="mb-2">
+                          <strong>Founded:</strong> {clinic.metadata.founded}
+                        </p>
+                        <p className="mb-0">
+                          <strong>Languages:</strong> {clinic.metadata.languages.join(", ")}
+                        </p>
+                      </div>
+                      <div className="col-md-6">
+                        <p className="mb-2">
+                          <strong>Specialties:</strong>
+                        </p>
+                        <ul className="list-unstyled mb-0">
+                          {clinic.metadata.specialties.map((specialty, index) => (
+                            <li key={index} className="small text-muted">
+                              • {specialty}
+                            </li>
+                          ))}
+                        </ul>
+                      </div>
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>

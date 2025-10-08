@@ -107,7 +107,7 @@ export const aboutContent = {
   contactInfo: {
     title: "Visit Our Clinic",
     address: {
-      street: "123 Medical Center Drive",
+      street: "71 Bouandary Road, Madina Social Welfare Round About",
       city: "Accra, Greater Accra",
       postal: "GA-123-4567"
     },
@@ -117,8 +117,8 @@ export const aboutContent = {
       sunday: "Sunday: Closed"
     },
     contact: {
-      phone: "+233 24 123 4567",
-      email: "info@clarityeyeclinic.com"
+      phone: "+233 59 410 0778",
+      email: "clarityeyecareconsult@gmail.com"
     }
   }
 }

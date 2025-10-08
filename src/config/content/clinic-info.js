@@ -13,7 +13,7 @@ export const clinicInfo = {
       emergency: "+233-59-410-0778", 
       formatted: "(233) 59-410-0778"
     },
-    email: "info@clarityeye.com",
+    email: "clarityeyecareconsult@gmail.com",
     address: {
       street: "71 Bouandary Road, Madina Social Welfare Round About",
       landmark: "Near Emmanuel Villa Bus Stop, Opposite Medimart Pharmacy",
@@ -85,7 +85,7 @@ export const clinicInfo = {
       links: [
         { platform: "Facebook", url: "https://www.facebook.com/p/Clarity-Eye-Care-Consult-100064021844403/", icon: "facebook" },
         { platform: "Instagram", url: "https://instagram.com/eyecareclarity", icon: "instagram" },
-        { platform: "Twitter", url: "https://twitter.com/clarityeye", icon: "twitter" },
+        { platform: "Twitter", url: "#", icon: "twitter" },
         { platform: "LinkedIn", url: "#", icon: "linkedin" }
       ]
     }

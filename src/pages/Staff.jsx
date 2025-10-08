@@ -57,15 +57,29 @@ export default function Staff() {
             {/* Statistics - Right Side */}
             <div className="col-lg-6 col-md-5">
               <div className="stats-grid-premium row g-3">
-                {statistics.map((stat, index) => (
-                  <div key={index} className="col-6">
-                    <div className="stat-card-premium text-center p-3 position-relative">
-                      <div className="stat-value-premium fw-bold mb-1">{stat.value}</div>
-                      <div className="stat-label-premium small">{stat.label}</div>
-                      <div className="stat-card-border"></div>
+                {statistics.map((stat, index) => {
+                  // Define icons for each statistic
+                  const statIcons = [
+                    'bi-award', // Years of experience
+                    'bi-people', // Expert staff  
+                    'bi-emoji-smile', // Happy patients
+                    'bi-heart-pulse' // Successful surgeries
+                  ];
+                  
+                  return (
+                    <div key={index} className="col-6">
+                      <div className="stat-card-premium text-center p-3 position-relative">
+                        <div className="stat-icon-container mb-2">
+                          <i className={`bi ${statIcons[index]} stat-icon`}></i>
+                          <div className="stat-icon-glow"></div>
+                        </div>
+                        <div className="stat-value-premium fw-bold mb-1">{stat.value}</div>
+                        <div className="stat-label-premium small">{stat.label}</div>
+                        <div className="stat-card-border"></div>
+                      </div>
                     </div>
-                  </div>
-                ))}
+                  );
+                })}
               </div>
             </div>
           </div>

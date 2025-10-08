@@ -15,5 +15,6 @@ export const websiteContent = {
   hero: homepageContent.hero,
   appointments: appointmentsContent,
   global: globalContent,
-   about: aboutContent  // Add this line
+  about: aboutContent,
+  footer: clinicInfo.footer  // Add this line to export footer content
 }

@@ -1,3 +1,36 @@
+/* Calista Font Faces */
+@font-face {
+  font-family: 'Calista';
+  src: url('../../../public/fonts/calista/WOFF/Calista-Regular.woff') format('woff');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Calista';
+  src: url('../../../public/fonts/calista/WOFF/Calista-Italic.woff') format('woff');
+  font-weight: 400;
+  font-style: italic;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Calista-Bold';
+  src: url('../../../public/fonts/calista/WOFF/Calista-Bold.woff') format('woff');
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Calista';
+  src: url('../../../public/fonts/calista/WOFF/Calista-BoldItalic.woff') format('woff');
+  font-weight: 700;
+  font-style: italic;
+  font-display: swap;
+}
+
 :root {
   /* Brand Colors */
   --bs-primary: #2c3e50;
@@ -41,7 +74,7 @@
   
   /* Typography */
   --font-family-base: 'Inter', system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
-  --font-family-heading: 'Lora', 'Georgia', serif;
+  --font-family-heading: 'Calista-Bold';
 
   /* Spacing */
   --spacing-xs: 0.25rem;

@@ -5,8 +5,8 @@
 export const homepageContent = {
   hero: {
     title: {
-      line1: "Crystal",
-      line2: "Clear", 
+      line1: "Crystal Clear",
+      line2: "", 
       line3: "Vision"
     },
     description: "Experience world-class eye care with state-of-the-art technology, personalized treatment plans, and a team dedicated to protecting your most precious sense.",

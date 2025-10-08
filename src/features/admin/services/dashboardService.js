@@ -1,5 +1,6 @@
 import { supabase } from '../../../lib/supabaseClient'
 
+// In dashboardService.js
 export const dashboardService = {
   async fetchDashboardData() {
     const today = new Date().toISOString().split('T')[0]
@@ -14,13 +15,25 @@ export const dashboardService = {
     ] = await Promise.all([
       supabase
         .from('appointments')
-        .select('*')
+        .select(`
+          *,
+          services (
+            name,
+            duration
+          )
+        `)
         .eq('appointment_date', today)
         .neq('status', 'cancelled'),
 
       supabase
         .from('appointments')
-        .select('*')
+        .select(`
+          *,
+          services (
+            name,
+            duration
+          )
+        `)
         .eq('status', 'pending'),
 
       supabase
@@ -35,7 +48,13 @@ export const dashboardService = {
 
       supabase
         .from('appointments')
-        .select('*, services(name)')
+        .select(`
+          *,
+          services (
+            name,
+            duration
+          )
+        `)
         .order('created_at', { ascending: false })
         .limit(5),
 
@@ -65,6 +84,15 @@ export const dashboardService = {
       throw new Error(`Failed to fetch dashboard data: ${errorMessages}`)
     }
 
+    // Transform appointments data to include service names
+    const transformAppointments = (appointments) => {
+      return (appointments || []).map(appointment => ({
+        ...appointment,
+        service_name: appointment.services?.name || 'Unknown Service',
+        service_duration: appointment.services?.duration || 0
+      }))
+    }
+
     return {
       stats: {
         todayAppointments: todayAppointmentsResponse.data?.length || 0,
@@ -72,7 +100,7 @@ export const dashboardService = {
         unreadContacts: unreadContactsResponse.data?.length || 0,
         totalServices: servicesResponse.data?.length || 0
       },
-      recentAppointments: recentAppointmentsResponse.data || [],
+      recentAppointments: transformAppointments(recentAppointmentsResponse.data),
       recentContacts: recentContactsResponse.data || []
     }
   }

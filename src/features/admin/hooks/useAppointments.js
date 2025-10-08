@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react'
 import { appointmentsService } from '../services/appointmentsService'
 import { useAdmin } from '../../../contexts/AdminContext'
 
+// In useAppointments hook
 export function useAppointments() {
   const [appointments, setAppointments] = useState([])
   const [loading, setLoading] = useState(true)

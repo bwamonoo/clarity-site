@@ -34,7 +34,7 @@ export const clinicInfo = {
   social: {
     facebook: "https://www.facebook.com/p/Clarity-Eye-Care-Consult-100064021844403/",
     instagram: "https://instagram.com/eyecareclarity",
-    twitter: "https://twitter.com/clarityeye"
+    twitter: "#"
   },
 
   // Clinic Metadata

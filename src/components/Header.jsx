@@ -26,7 +26,7 @@ export default function Header(){
           <NavLink className="navbar-brand" to="/" onClick={closeMobileMenu}>
             <div className="d-flex align-items-center">
               <div className="brand-logo-modern me-3">
-                <i className="bi bi-eye"></i>
+                <img src="../../../public/images/clarity-logo.png" alt="Clarity Eye Clinic" />
               </div>
               <div>
                 <span className="brand-name-modern">CLARITY</span>

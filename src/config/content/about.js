@@ -22,11 +22,11 @@ export const aboutContent = {
     },
     mission: {
       title: "Our Mission",
-      content: "To deliver exceptional eye care through advanced technology, expert medical staff, and personalized treatment plans that prioritize patient well-being and visual health."
+      content: "To provide optimal eye and vision care with unparalleled optical options and solutions while providing exceptional customer service. We are in the business of creating happiness while helping our customers see and look the best way they can."
     },
     vision: {
       title: "Our Vision",
-      content: "To be the leading eye care provider in the region, known for innovation, compassionate care, and commitment to improving our patients' quality of life through better vision."
+      content: "We intend to be the eye care practice of choice to patients of all ages in our market area. We want people to think of us first as the logical place to call for eye care."
     }
   },
 

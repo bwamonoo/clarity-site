@@ -15,7 +15,7 @@ export const homepageContent = {
     images: [
       'https://images.unsplash.com/photo-1758101512269-660feabf64fd?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxtb2Rlcm4lMjBtZWRpY2FsJTIwY2xpbmljJTIwaW50ZXJpb3J8ZW58MXx8fHwxNzU4NDYzMzk1fDA&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral',
       'https://images.unsplash.com/photo-1682663947124-88b7b7e12889?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxleWUlMjBleGFtaW5hdGlvbiUyMGVxdWlwbWVudHxlbnwxfHx8fDE3NTg0NDMzMzR8MA&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral',
-      '../../../public/images/mss-clarity.jpg'
+      '/images/mss-clarity.jpg'
     ],
 
     // Statistics - easy to update numbers

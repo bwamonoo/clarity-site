@@ -245,7 +245,7 @@ export default function Hero() {
                 >
                   <div className="d-flex align-items-center gap-3">
                     <div className="brand-logo-modern rounded-3 d-flex align-items-center justify-content-center shadow" style={{ width: '56px', height: '56px' }}>
-                      <img src="../../../public/images/clarity-logo.png" alt="Clarity Eye Clinic" />
+                      <img src="/images/clarity-logo.png" alt="Clarity Eye Clinic" />
                     </div>
                     <div>
                       <p className="fs-4 text-brand mb-0 fw-bold">{hero.floatingCards.procedures.value}</p>

@@ -15,7 +15,7 @@ export default function Footer() {
             <div className="footer-brand">
               <div className="d-flex align-items-center mb-3">
                 <div className="footer-logo me-3">
-                  <img src="../../../public/images/clarity-logo.png" alt="Clarity Eye Clinic" />
+                  <img src="/images/clarity-logo.png" alt="Clarity Eye Clinic" />
                 </div>
                 <div>
                   <h5 className="footer-title mb-1">{clinic.name}</h5>

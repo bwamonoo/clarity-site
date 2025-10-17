@@ -15,8 +15,8 @@ export const clinicInfo = {
     },
     email: "clarityeyecareconsult@gmail.com",
     address: {
-      street: "71 Boundary Road, Madina Social Welfare Round About",
-      landmark: "Near Emmanuel Villa Bus Stop, Opposite Medimart Pharmacy",
+      street: "71 Boundary Road, Madina Social Welfare Round About.",
+      landmark: "Near Emmanuel Villa Bus Stop, Opposite Medimart Pharmacy.",
       city: "Accra",
       country: "Ghana"
     }

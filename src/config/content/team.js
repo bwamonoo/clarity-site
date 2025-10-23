@@ -13,39 +13,42 @@ export const teamMembers = {
   members: [
     {
       id: 1,
-      name: "Dr. Kwame Mensah",
-      title: "Chief Ophthalmologist",
+      name: "Dr. Georgette Osei Kontoh",
+      title: "Specialist Ophthalmologist",
       specialization: "Cataract & Refractive Surgery",
-      bio: "With over 15 years of experience, Dr. Mensah specializes in advanced cataract surgery and laser vision correction.",
+      bio: "With over 15 years of experience, Dr. Kontoh specializes in advanced cataract surgery and laser vision correction.",
       education: ["MD - University of Ghana", "Fellowship - Johns Hopkins University"],
-      image: "/images/team/dr-mensah.jpg",
+      image: "/images/team/dr-kontoh.jpg",
       specialties: ["Cataract Surgery", "LASIK", "Glaucoma Treatment"],
-      languages: ["English", "Twi", "French"],
-      yearsExperience: 15
+      languages: ["English", "Twi"],
+      yearsExperience: 15,
+      location: "Madina - East Legon - Accra"
     },
     {
       id: 2, 
-      name: "Dr. Ama Serwaa",
-      title: "Pediatric Ophthalmologist",
+      name: "Dr. Richelle Adamson",
+      title: "Specialist Ophthalmologist",
       specialization: "Children's Eye Health",
-      bio: "Dr. Serwaa is dedicated to providing compassionate eye care for children of all ages.",
+      bio: "Dr. Adamson is dedicated to providing compassionate eye care for children of all ages.",
       education: ["MD - Kwame Nkrumah University", "Pediatric Fellowship - Great Ormond Street Hospital"],
-      image: "/images/team/dr-serwaa.jpg", 
+      image: "/images/team/dr-adamson.jpg", 
       specialties: ["Pediatric Eye Exams", "Strabismus Surgery", "Vision Therapy"],
-      languages: ["English", "Twi", "Ga"],
-      yearsExperience: 12
+      languages: ["English", "Twi"],
+      yearsExperience: 12,
+      location: "Kwahu - Mpraeso"
     },
     {
       id: 3,
-      name: "Dr. Kofi Annan", 
-      title: "Optometrist",
+      name: "Dr. Joel Oti Amankwah", 
+      title: "Specialist Ophthalmologist",
       specialization: "Contact Lenses & Primary Care",
-      bio: "Dr. Annan provides comprehensive eye examinations and specializes in contact lens fittings.",
+      bio: "Dr. Amankwah provides comprehensive eye examinations and specializes in contact lens fittings.",
       education: ["OD - University of Cape Coast", "Contact Lens Residency - Moorfields Eye Hospital"],
-      image: "/images/team/dr-annan.jpg",
+      image: "/images/team/dr-amankwah.jpg",
       specialties: ["Contact Lenses", "Dry Eye Treatment", "Myopia Control"],
-      languages: ["English", "Twi", "Ewe"], 
-      yearsExperience: 8
+      languages: ["English", "Twi"], 
+      yearsExperience: 8,
+      location: "Kumasi"
     }
   ],
 

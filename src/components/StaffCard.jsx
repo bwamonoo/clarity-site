@@ -74,6 +74,14 @@ export default function StaffCard({ member }) {
           {/* Staff Title */}
           <p className="staff-title-modern text-accent mb-2">{member.title}</p>
 
+          {/* Location */}
+          {member.location && (
+            <p className="staff-location mb-2">
+              <i className="bi bi-geo-alt me-2 small"></i>
+              {member.location}
+            </p>
+          )}
+
           {/* Specialization */}
           <p className="staff-specialization mb-3">
             <i className="bi bi-award me-2 small"></i>

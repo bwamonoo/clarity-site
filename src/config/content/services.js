@@ -55,8 +55,6 @@ export const servicesContent = {
       title: "Comprehensive Eye Exams",
       body: "Thorough eye examinations for all ages using advanced diagnostic technology.",
       icon: "bi-eye",
-      price: 150,
-      duration: "45-60 minutes",
       features: [
         "Visual acuity testing",
         "Retinal photography & OCT scanning",
@@ -71,8 +69,6 @@ export const servicesContent = {
       title: "Contact Lens Services", 
       body: "Professional fitting and ongoing care for all types of contact lenses.",
       icon: "bi-person",
-      price: 200,
-      duration: "60 minutes",
       features: [
         "Custom lens fitting & evaluation",
         "Trial lens assessment",
@@ -86,9 +82,7 @@ export const servicesContent = {
       id: 3,
       title: "Cataract Consultation",
       body: "Expert evaluation and surgical planning for cataract treatment.",
-      icon: "bi-scissors", 
-      price: 180,
-      duration: "90 minutes",
+      icon: "bi-scissors",
       features: [
         "Cataract assessment & staging",
         "Surgical options discussion",
@@ -103,8 +97,6 @@ export const servicesContent = {
       title: "Glaucoma Management",
       body: "Comprehensive screening and treatment for glaucoma conditions.",
       icon: "bi-droplet",
-      price: 220,
-      duration: "75 minutes", 
       features: [
         "Intraocular pressure testing",
         "Visual field analysis",
@@ -119,8 +111,6 @@ export const servicesContent = {
       title: "Pediatric Eye Care",
       body: "Specialized eye exams and vision therapy for children.",
       icon: "bi-heart",
-      price: 160,
-      duration: "60 minutes",
       features: [
         "Child-friendly examination",
         "Developmental vision assessment", 
@@ -135,8 +125,6 @@ export const servicesContent = {
       title: "Low Vision Support",
       body: "Advanced solutions and rehabilitation for low vision patients.",
       icon: "bi-eye",
-      price: 250,
-      duration: "90 minutes",
       features: [
         "Low vision assessment",
         "Magnification aids fitting",

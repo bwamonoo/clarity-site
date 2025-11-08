@@ -37,7 +37,7 @@ export const servicesContent = {
         {
           icon: "bi-gear-wide-connected", 
           title: "Modern Equipment",
-          description: "OCT, visual field, and laser-assisted procedures."
+          description: "OCT, visual field, CCT, and VFT."
         },
         {
           icon: "bi-heart-fill",

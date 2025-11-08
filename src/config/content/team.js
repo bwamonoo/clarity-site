@@ -48,7 +48,7 @@ export const teamMembers = {
       specialties: ["Contact Lenses", "Dry Eye Treatment", "Myopia Control"],
       languages: ["English", "Twi"], 
       yearsExperience: 8,
-      location: "Kumasi"
+      location: "Asafo - Kumasi"
     }
   ],
 

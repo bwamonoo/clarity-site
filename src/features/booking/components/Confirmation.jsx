@@ -34,8 +34,8 @@ export default function Confirmation() {
       'scheduled appointment time.',
       '',
       'For changes or cancellations, contact us:',
-      'Phone: +233-XX-XXX-XXXX',
-      'Email: info@clarityeye.com',
+      'Phone: +233-59-410-0778',
+      'Email: clarityeyecareconsult@gmail.com',
       '',
       '═══════════════════════════════════════',
     ].filter(Boolean).join('\n')

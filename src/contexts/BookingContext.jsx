@@ -42,7 +42,7 @@ const bookingReducer = (state, action) => {
     case 'SET_SERVICES':
       return { ...state, services: action.payload }
     case 'RESET_BOOKING':
-      return initialState
+      return { ...initialState, services: state.services }
     default:
       return state
   }

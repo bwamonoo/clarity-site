@@ -3,17 +3,18 @@ import { AdminProvider, useAdmin } from '../contexts/AdminContext'
 import { ToastProvider } from '../contexts/ToastContext' // Import ToastProvider
 import AdminLayout from '../layouts/AdminLayout'
 import { supabase } from '../lib/supabaseClient'
-import { 
-  AdminSidebar, 
+import {
+  AdminSidebar,
   AdminContent,
   DashboardTab,
-  AppointmentsTab, 
+  AppointmentsTab,
   ServicesTab,
+  DoctorsTab,
   ScheduleTab,
   ContactsTab,
   AdminLogin,
   LoadingSpinner,
-  MobileBreadcrumb // Import the new component
+  MobileBreadcrumb
 } from '../features/admin'
 
 function AdminContentWrapper({ onLogout }) {
@@ -21,10 +22,11 @@ function AdminContentWrapper({ onLogout }) {
   const [sidebarOpen, setSidebarOpen] = useState(false)
 
   const renderActiveTab = () => {
-    switch(activeTab) {
+    switch (activeTab) {
       case 'dashboard': return <DashboardTab />
       case 'appointments': return <AppointmentsTab />
       case 'services': return <ServicesTab />
+      case 'doctors': return <DoctorsTab />
       case 'schedule': return <ScheduleTab />
       case 'contacts': return <ContactsTab />
       default: return <DashboardTab />
@@ -44,12 +46,12 @@ function AdminContentWrapper({ onLogout }) {
     <>
       {/* Mobile Breadcrumb */}
       <MobileBreadcrumb onToggleSidebar={toggleSidebar} />
-      
+
       <div className="container-fluid py-4 px-4">
         <div className="row">
           {/* Sidebar Column */}
-          <div className={`col-md-3 col-lg-2 mb-4 ${sidebarOpen ? 'mobile-sidebar-open' : 'd-none d-md-block'}`} 
-               style={{position: 'relative', zIndex: 100}}>
+          <div className={`col-md-3 col-lg-2 mb-4 ${sidebarOpen ? 'mobile-sidebar-open' : 'd-none d-md-block'}`}
+            style={{ position: 'relative', zIndex: 100 }}>
             <AdminSidebar onLogout={onLogout} onTabSelect={handleTabSelect} />
           </div>
 
@@ -63,7 +65,7 @@ function AdminContentWrapper({ onLogout }) {
 
         {/* Mobile Sidebar Overlay */}
         {sidebarOpen && (
-          <div 
+          <div
             className="mobile-sidebar-overlay d-lg-none"
             onClick={() => setSidebarOpen(false)}
           ></div>
@@ -76,7 +78,7 @@ function AdminContentWrapper({ onLogout }) {
 export default function Admin() {
   const [user, setUser] = useState(null)
   const [loading, setLoading] = useState(true)
-  
+
   useEffect(() => {
     const getSession = async () => {
       const { data: { session } } = await supabase.auth.getSession()

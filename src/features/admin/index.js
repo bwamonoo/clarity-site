@@ -10,6 +10,7 @@ export { default as MobileBreadcrumb } from './components/shared/MobileBreadcrum
 export { default as DashboardTab } from './components/dashboard/DashboardTab'
 export { default as AppointmentsTab } from './components/appointments/AppointmentsTab'
 export { default as ServicesTab } from './components/services/ServicesTab'
+export { default as DoctorsTab } from './components/doctors/DoctorsTab'
 export { default as ScheduleTab } from './components/schedule/ScheduleTab'
 export { default as ContactsTab } from './components/contacts/ContactsTab'
 
@@ -17,12 +18,14 @@ export { default as ContactsTab } from './components/contacts/ContactsTab'
 export { useAppointments } from './hooks/useAppointments'
 export { useDashboard } from './hooks/useDashboard'
 export { useServices } from './hooks/useServices'
+export { useDoctors } from './hooks/useDoctors'
 export { useSchedule } from './hooks/useSchedule'
 export { useContacts } from './hooks/useContacts'
 
 // Services
 export { appointmentsService } from './services/appointmentsService'
 export { dashboardService } from './services/dashboardService'
-export { servicesService } from './services/servicesService'  // Fixed name
+export { servicesService } from './services/servicesService'
+export { doctorsService } from './services/doctorsService'
 export { scheduleService } from './services/scheduleService'
 export { contactsService } from './services/contactsService'

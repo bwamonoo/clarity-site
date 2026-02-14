@@ -9,6 +9,7 @@ export default function AdminSidebar({ onLogout, onTabSelect }) {  // Add onTabS
     { id: 'dashboard', name: 'Dashboard', icon: 'bi-speedometer2' },
     { id: 'appointments', name: 'Appointments', icon: 'bi-calendar-check' },
     { id: 'services', name: 'Services', icon: 'bi-eye' },
+    { id: 'doctors', name: 'Doctors', icon: 'bi-person-badge' },
     { id: 'schedule', name: 'Schedule', icon: 'bi-clock' },
     { id: 'contacts', name: 'Contacts', icon: 'bi-chat-dots' }
   ]
@@ -16,7 +17,7 @@ export default function AdminSidebar({ onLogout, onTabSelect }) {  // Add onTabS
   const handleTabChange = (tab) => {
     clearMessages()
     setActiveTab(tab)
-    
+
     // Close sidebar on mobile after tab selection
     if (onTabSelect) {
       onTabSelect()
@@ -44,13 +45,12 @@ export default function AdminSidebar({ onLogout, onTabSelect }) {  // Add onTabS
           {tabs.map(tab => (
             <button
               key={tab.id}
-              className={`sidebar-nav-link text-start d-flex align-items-center ${
-                activeTab === tab.id 
-                  ? 'sidebar-nav-active' 
+              className={`sidebar-nav-link text-start d-flex align-items-center ${activeTab === tab.id
+                  ? 'sidebar-nav-active'
                   : 'sidebar-nav-inactive'
-              }`}
+                }`}
               onClick={() => handleTabChange(tab.id)}
-              style={{cursor: 'pointer'}}
+              style={{ cursor: 'pointer' }}
             >
               <i className={`bi ${tab.icon}`}></i>
               <span>{tab.name}</span>
@@ -60,7 +60,7 @@ export default function AdminSidebar({ onLogout, onTabSelect }) {  // Add onTabS
           <button
             className="sidebar-nav-link text-start d-flex align-items-center sidebar-nav-logout"
             onClick={handleLogoutClick}
-            style={{cursor: 'pointer'}}
+            style={{ cursor: 'pointer' }}
           >
             <i className="bi bi-box-arrow-right"></i>
             <span>Logout</span>

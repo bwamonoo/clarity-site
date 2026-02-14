@@ -6,30 +6,35 @@ export default function MobileBreadcrumb({ onToggleSidebar, sidebarOpen }) {
   const { activeTab } = useAdmin()
 
   const tabConfig = {
-    dashboard: { 
-      name: 'Dashboard', 
+    dashboard: {
+      name: 'Dashboard',
       icon: 'bi-speedometer2',
       color: 'var(--accent)'
     },
-    appointments: { 
-      name: 'Appointments', 
+    appointments: {
+      name: 'Appointments',
       icon: 'bi-calendar-check',
       color: 'var(--success)'
     },
-    services: { 
-      name: 'Services', 
+    services: {
+      name: 'Services',
       icon: 'bi-eye',
       color: 'var(--info)'
     },
-    schedule: { 
-      name: 'Schedule', 
+    schedule: {
+      name: 'Schedule',
       icon: 'bi-clock',
       color: 'var(--warning)'
     },
-    contacts: { 
-      name: 'Contacts', 
+    contacts: {
+      name: 'Contacts',
       icon: 'bi-chat-dots',
       color: 'var(--primary)'
+    },
+    doctors: {
+      name: 'Doctors',
+      icon: 'bi-person-badge',
+      color: 'var(--accent)'
     }
   }
 

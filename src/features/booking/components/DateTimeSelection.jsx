@@ -10,7 +10,7 @@ export default function DateTimeSelection() {
   return (
     <div className="glass-card rounded-4 p-3 p-md-5">
       <h3 className="font-display mb-4 text-center">Choose Date & Time</h3>
-      
+
       {/* Error Display */}
       {state.error && (
         <div className="alert alert-warning mb-4">
@@ -42,10 +42,9 @@ export default function DateTimeSelection() {
         <div className="row g-1 g-sm-2">
           {calendarDays.map((date, index) => (
             <div key={index} className="col-3 col-sm-2 col-md-3 col-lg-2">
-              <div 
-                className={`calendar-day d-flex flex-column align-items-center justify-content-center p-2 p-sm-3 rounded-3 cursor-pointer ${
-                  state.selectedDate && fmtDateISOLocal(state.selectedDate) === fmtDateISOLocal(date) ? 'selected' : ''
-                }`}
+              <div
+                className={`calendar-day d-flex flex-column align-items-center justify-content-center p-2 p-sm-3 rounded-3 cursor-pointer ${state.selectedDate && fmtDateISOLocal(state.selectedDate) === fmtDateISOLocal(date) ? 'selected' : ''
+                  }`}
                 onClick={() => actions.setDate(date)}
               >
                 <small className="text-uppercase" style={{ fontSize: '0.7rem' }}>
@@ -75,19 +74,22 @@ export default function DateTimeSelection() {
             <div className="row g-1 g-sm-2">
               {state.slots.map((slot, index) => (
                 <div key={index} className="col-4 col-sm-3 col-md-4 col-lg-3">
-                  <div 
-                    className={`time-slot text-center py-2 px-1 px-sm-2 rounded-3 cursor-pointer ${
-                      state.selectedSlot?.start === slot.start ? 'selected' : 
-                      !slot.available ? 'unavailable' : ''
-                    }`}
+                  <div
+                    className={`time-slot text-center py-2 px-1 px-sm-2 rounded-3 cursor-pointer ${state.selectedSlot?.start === slot.start ? 'selected' :
+                        !slot.available ? 'unavailable' : ''
+                      }`}
                     onClick={() => slot.available && actions.setTimeSlot(slot)}
                   >
                     <div style={{ fontSize: '0.85rem', fontWeight: '500' }}>
                       {slot.label}
                     </div>
-                    {!slot.available && (
+                    {!slot.available ? (
                       <div className="small text-muted" style={{ fontSize: '0.65rem' }}>
-                        {slot.reasonNotAvail}
+                        Full
+                      </div>
+                    ) : slot.totalSpots > 1 && (
+                      <div className="small" style={{ fontSize: '0.6rem', color: slot.spotsLeft <= 1 ? '#ef4444' : '#22c55e' }}>
+                        {slot.spotsLeft} spot{slot.spotsLeft !== 1 ? 's' : ''} left
                       </div>
                     )}
                   </div>
@@ -106,13 +108,13 @@ export default function DateTimeSelection() {
       )}
 
       <div className="d-flex justify-content-between mt-4">
-        <button 
+        <button
           className="btn btn-outline-secondary"
           onClick={() => actions.setStep(1)}
         >
           Back
         </button>
-        <button 
+        <button
           className="btn btn-primary btn-gradient"
           disabled={!state.selectedSlot}
           onClick={() => actions.setStep(3)}

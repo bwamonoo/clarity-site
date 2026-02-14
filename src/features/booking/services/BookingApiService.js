@@ -1,40 +1,67 @@
-// src/services/booking/BookingApiService.js
 import { supabase } from '../../../lib/supabaseClient'
 
 export class BookingApiService {
-  // Pure API calls only - no business logic
   static async getServices() {
     const { data, error } = await supabase
       .from('services')
       .select('*')
       .eq('active', true)
       .order('name')
-    
+
     if (error) throw error
-    return data
+    return data || []
   }
 
-  static async getSchedule(weekday) {
+  static async getClinicSchedule() {
     const { data, error } = await supabase
       .from('clinic_schedule')
       .select('*')
-      .eq('weekday', weekday)
-      .eq('active', true)
-      .single()
-    
-    if (error) return null
-    return data
+      .order('weekday')
+
+    if (error) throw error
+    return data || []
   }
 
   static async getAppointments(date) {
     const { data, error } = await supabase
       .from('appointments')
-      .select('appointment_time, duration')
-      .eq('appointment_date', date.toISOString().split('T')[0])
-      .eq('status', 'confirmed')
-    
+      .select(`
+        appointment_time,
+        doctor_id,
+        services (
+          duration
+        )
+      `)
+      .eq('appointment_date', date)
+      .neq('status', 'cancelled')
+
     if (error) throw error
-    return data
+    return (data || []).map(apt => ({
+      appointment_time: apt.appointment_time,
+      doctor_id: apt.doctor_id,
+      duration: apt.services?.duration || 30
+    }))
+  }
+
+  static async getActiveDoctorCount() {
+    const { count, error } = await supabase
+      .from('doctors')
+      .select('*', { count: 'exact', head: true })
+      .eq('active', true)
+
+    if (error) throw error
+    // Fallback to 1 if no doctors table / no doctors — so booking still works
+    return count || 1
+  }
+
+  static async getActiveDoctorIds() {
+    const { data, error } = await supabase
+      .from('doctors')
+      .select('id')
+      .eq('active', true)
+
+    if (error) throw error
+    return (data || []).map(d => d.id)
   }
 
   static async createAppointment(appointmentData) {
@@ -42,7 +69,7 @@ export class BookingApiService {
       .from('appointments')
       .insert([appointmentData])
       .select()
-    
+
     if (error) throw error
     return data
   }

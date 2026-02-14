@@ -1,6 +1,9 @@
 // src/utils/dateUtils.js - UPDATED
 export const fmtDateISOLocal = (dateObj) => {
-  return dateObj.toISOString().slice(0, 10)
+  const y = dateObj.getFullYear()
+  const m = String(dateObj.getMonth() + 1).padStart(2, '0')
+  const d = String(dateObj.getDate()).padStart(2, '0')
+  return `${y}-${m}-${d}`
 }
 
 export const generateCalendarDays = (startDate, daysCount = 14) => {
@@ -17,21 +20,21 @@ export const formatAppointmentTime = (isoString) => {
   try {
     // Create date in local timezone
     const date = new Date(isoString)
-    
+
     // Ensure we're working with local time
     const localDate = new Date(date.getTime() - (date.getTimezoneOffset() * 60000))
-    
+
     return {
-      date: localDate.toLocaleDateString('en-US', { 
-        weekday: 'long', 
-        year: 'numeric', 
-        month: 'long', 
-        day: 'numeric' 
+      date: localDate.toLocaleDateString('en-US', {
+        weekday: 'long',
+        year: 'numeric',
+        month: 'long',
+        day: 'numeric'
       }),
-      time: localDate.toLocaleTimeString('en-US', { 
-        hour: 'numeric', 
-        minute: '2-digit', 
-        hour12: true 
+      time: localDate.toLocaleTimeString('en-US', {
+        hour: 'numeric',
+        minute: '2-digit',
+        hour12: true
       }),
       isoString: localDate.toISOString() // Return consistent ISO string
     }
@@ -51,10 +54,10 @@ export const createLocalISODate = (date, timeString) => {
 // Helper to compare dates without timezone issues
 export const isToday = (dateString) => {
   if (!dateString) return false
-  
+
   const inputDate = new Date(dateString)
   const today = new Date()
-  
+
   return (
     inputDate.getDate() === today.getDate() &&
     inputDate.getMonth() === today.getMonth() &&
@@ -64,13 +67,13 @@ export const isToday = (dateString) => {
 
 export const isUpcoming = (dateString) => {
   if (!dateString) return false
-  
+
   const inputDate = new Date(dateString)
   const today = new Date()
-  
+
   // Reset times to compare only dates
   inputDate.setHours(0, 0, 0, 0)
   today.setHours(0, 0, 0, 0)
-  
+
   return inputDate >= today
 }

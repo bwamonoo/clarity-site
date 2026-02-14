@@ -1,5 +1,5 @@
-import React, { createContext, useContext, useReducer, useEffect } from 'react'
-import { useBooking } from '../features/booking' // Changed import path
+import React, { createContext, useContext, useReducer, useEffect, useRef } from 'react'
+import { useBooking } from '../features/booking'
 
 const BookingContext = createContext()
 
@@ -51,58 +51,61 @@ const bookingReducer = (state, action) => {
 export const BookingProvider = ({ children }) => {
   const [state, dispatch] = useReducer(bookingReducer, initialState)
   const bookingApi = useBooking()
+  const dateRequestRef = useRef(0)
 
-  // Load services on mount
+  // Sync services from the hook (single source of truth)
   useEffect(() => {
-    const loadServices = async () => {
-      try {
-        dispatch({ type: 'SET_LOADING', payload: true })
-        // Wait for services to load from the hook
-        if (bookingApi.services.length > 0) {
-          dispatch({ type: 'SET_SERVICES', payload: bookingApi.services })
-        }
-      } catch (error) {
-        dispatch({ type: 'SET_ERROR', payload: 'Failed to load services' })
-      } finally {
-        dispatch({ type: 'SET_LOADING', payload: false })
-      }
+    if (bookingApi.services.length > 0) {
+      dispatch({ type: 'SET_SERVICES', payload: bookingApi.services })
     }
-
-    loadServices()
   }, [bookingApi.services])
 
   // Actions
   const actions = {
     setStep: (step) => dispatch({ type: 'SET_STEP', payload: step }),
-    
+
     setService: (service) => dispatch({ type: 'SET_SERVICE', payload: service }),
-    
+
     setDate: async (date) => {
+      // Race condition guard: increment request ID and capture it
+      const requestId = ++dateRequestRef.current
+
       dispatch({ type: 'SET_DATE', payload: date })
       dispatch({ type: 'SET_LOADING', payload: true })
-      
+
       try {
         const scheduleData = await bookingApi.getScheduleForDate(date)
+
+        // Discard if a newer date was selected while we were loading
+        if (requestId !== dateRequestRef.current) return
+
         dispatch({ type: 'SET_SCHEDULE', payload: scheduleData })
-        
+
         if (scheduleData) {
           const timeSlots = await bookingApi.generateTimeSlots(date, scheduleData, state.selectedService?.duration)
+
+          // Check again after second async call
+          if (requestId !== dateRequestRef.current) return
+
           dispatch({ type: 'SET_SLOTS', payload: timeSlots })
         }
       } catch (error) {
+        if (requestId !== dateRequestRef.current) return
         dispatch({ type: 'SET_ERROR', payload: 'Failed to load schedule' })
       } finally {
-        dispatch({ type: 'SET_LOADING', payload: false })
+        if (requestId === dateRequestRef.current) {
+          dispatch({ type: 'SET_LOADING', payload: false })
+        }
       }
     },
-    
+
     setTimeSlot: (slot) => dispatch({ type: 'SET_TIME_SLOT', payload: slot }),
-    
+
     setCustomerInfo: (info) => dispatch({ type: 'SET_CUSTOMER_INFO', payload: info }),
-    
+
     submitBooking: async () => {
       dispatch({ type: 'SET_LOADING', payload: true })
-      
+
       try {
         const bookingData = {
           service: state.selectedService,
@@ -110,14 +113,14 @@ export const BookingProvider = ({ children }) => {
           slot: state.selectedSlot,
           customer: state.customerInfo
         }
-        
+
         const result = await bookingApi.submitBooking(bookingData)
         dispatch({ type: 'SET_BOOKING_RESULT', payload: result })
         return result
       } catch (error) {
-        const errorResult = { 
-          success: false, 
-          message: 'Booking failed. Please try again.' 
+        const errorResult = {
+          success: false,
+          message: 'Booking failed. Please try again.'
         }
         dispatch({ type: 'SET_BOOKING_RESULT', payload: errorResult })
         return errorResult
@@ -125,7 +128,7 @@ export const BookingProvider = ({ children }) => {
         dispatch({ type: 'SET_LOADING', payload: false })
       }
     },
-    
+
     resetBooking: () => dispatch({ type: 'RESET_BOOKING' })
   }
 

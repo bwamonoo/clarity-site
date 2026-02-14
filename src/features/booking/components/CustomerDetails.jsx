@@ -12,7 +12,7 @@ export default function CustomerDetails() {
       ...state.customerInfo,
       [field]: value
     })
-    
+
     if (validationErrors[field]) {
       setValidationErrors(prev => ({
         ...prev,
@@ -23,10 +23,10 @@ export default function CustomerDetails() {
 
   const handleSubmit = (e) => {
     e.preventDefault()
-    
+
     const errors = getValidationErrors(state.customerInfo)
     setValidationErrors(errors)
-    
+
     if (Object.keys(errors).length === 0) {
       actions.submitBooking()
     }
@@ -37,13 +37,13 @@ export default function CustomerDetails() {
   return (
     <div className="glass-card rounded-4 p-4 p-md-5">
       <h3 className="font-display mb-4 text-center">Your Details</h3>
-      
+
       <form onSubmit={handleSubmit}>
         <div className="row g-3">
           <div className="col-md-6">
             <label className="form-label">Full Name *</label>
-            <input 
-              type="text" 
+            <input
+              type="text"
               className={`form-control ${validationErrors.name ? 'is-invalid' : ''}`}
               value={state.customerInfo.name}
               onChange={(e) => handleInputChange('name', e.target.value)}
@@ -55,8 +55,8 @@ export default function CustomerDetails() {
           </div>
           <div className="col-md-6">
             <label className="form-label">Phone Number *</label>
-            <input 
-              type="tel" 
+            <input
+              type="tel"
               className={`form-control ${validationErrors.phone ? 'is-invalid' : ''}`}
               value={state.customerInfo.phone}
               onChange={(e) => handleInputChange('phone', e.target.value)}
@@ -69,8 +69,8 @@ export default function CustomerDetails() {
           </div>
           <div className="col-12">
             <label className="form-label">Email (optional)</label>
-            <input 
-              type="email" 
+            <input
+              type="email"
               className={`form-control ${validationErrors.email ? 'is-invalid' : ''}`}
               value={state.customerInfo.email}
               onChange={(e) => handleInputChange('email', e.target.value)}
@@ -112,7 +112,7 @@ export default function CustomerDetails() {
                 <div>
                   <div className="service-name fw-medium">{state.selectedService.name}</div>
                   <div className="service-duration text-muted">
-                    {state.selectedService.duration} mins • ${state.selectedService.price}
+                    {state.selectedService.duration} mins • GH₵ {state.selectedService.price}
                   </div>
                   <div className="service-description small text-muted">
                     {state.selectedService.description}
@@ -130,14 +130,14 @@ export default function CustomerDetails() {
         )}
 
         <div className="d-flex justify-content-between mt-4">
-          <button 
+          <button
             type="button"
             className="btn btn-outline-secondary"
             onClick={() => actions.setStep(2)}
           >
             Back
           </button>
-          <button 
+          <button
             type="submit"
             className="btn btn-primary btn-gradient"
             disabled={state.loading}

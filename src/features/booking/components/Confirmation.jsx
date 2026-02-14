@@ -6,6 +6,51 @@ export default function Confirmation() {
   const { state, actions } = useBookingContext()
   const appointmentTime = state.selectedSlot ? formatAppointmentTime(state.selectedSlot.start) : null
 
+  const downloadConfirmation = () => {
+    if (!state.bookingResult?.success || !appointmentTime || !state.selectedService) return
+
+    const lines = [
+      '═══════════════════════════════════════',
+      '       CLARITY EYE CLINIC',
+      '     Appointment Confirmation',
+      '═══════════════════════════════════════',
+      '',
+      `Booking ID:    ${state.bookingResult.bookingId || 'N/A'}`,
+      `Patient:       ${state.customerInfo.name}`,
+      `Phone:         ${state.customerInfo.phone}`,
+      state.customerInfo.email ? `Email:         ${state.customerInfo.email}` : null,
+      '',
+      '───────────────────────────────────────',
+      '',
+      `Service:       ${state.selectedService.name}`,
+      `Date:          ${appointmentTime.date}`,
+      `Time:          ${appointmentTime.time}`,
+      `Duration:      ${state.selectedService.duration} mins`,
+      state.selectedService.price ? `Price:         GH₵ ${state.selectedService.price}` : null,
+      '',
+      '───────────────────────────────────────',
+      '',
+      'Please arrive 10 minutes before your',
+      'scheduled appointment time.',
+      '',
+      'For changes or cancellations, contact us:',
+      'Phone: +233-XX-XXX-XXXX',
+      'Email: info@clarityeye.com',
+      '',
+      '═══════════════════════════════════════',
+    ].filter(Boolean).join('\n')
+
+    const blob = new Blob([lines], { type: 'text/plain' })
+    const url = URL.createObjectURL(blob)
+    const a = document.createElement('a')
+    a.href = url
+    a.download = `clarity-appointment-${state.bookingResult.bookingId || 'confirmation'}.txt`
+    document.body.appendChild(a)
+    a.click()
+    document.body.removeChild(a)
+    URL.revokeObjectURL(url)
+  }
+
   if (!state.bookingResult) {
     return (
       <div className="glass-card rounded-4 p-4 p-md-5 text-center">
@@ -27,7 +72,7 @@ export default function Confirmation() {
         <p className="text-muted mb-4">
           {state.bookingResult.message || 'There was an issue processing your booking. Please try again.'}
         </p>
-        <button 
+        <button
           className="btn btn-primary btn-gradient"
           onClick={actions.resetBooking}
         >
@@ -75,13 +120,13 @@ export default function Confirmation() {
       )}
 
       <div className="d-flex flex-column flex-sm-row gap-3 justify-content-center">
-        <button 
+        <button
           className="btn btn-primary btn-gradient"
           onClick={actions.resetBooking}
         >
           Book Another Appointment
         </button>
-        <button className="btn btn-outline-accent">
+        <button className="btn btn-outline-accent" onClick={downloadConfirmation}>
           <i className="bi bi-download me-2"></i>
           Download Confirmation
         </button>

@@ -29,7 +29,7 @@ export default function DateTimeSelection() {
             <div>
               <h6 className="mb-1">{state.selectedService.name}</h6>
               <p className="small text-muted mb-0">
-                {state.selectedService.duration} mins • ${state.selectedService.price}
+                {state.selectedService.duration} mins • GH₵ {state.selectedService.price}
               </p>
             </div>
           </div>
@@ -80,7 +80,7 @@ export default function DateTimeSelection() {
                       state.selectedSlot?.start === slot.start ? 'selected' : 
                       !slot.available ? 'unavailable' : ''
                     }`}
-                    onClick={() => actions.setTimeSlot(slot)}
+                    onClick={() => slot.available && actions.setTimeSlot(slot)}
                   >
                     <div style={{ fontSize: '0.85rem', fontWeight: '500' }}>
                       {slot.label}

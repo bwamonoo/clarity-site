@@ -1,5 +1,4 @@
 export { useBooking } from './hooks/useBooking'
-export { useBookingState } from './hooks/useBookingState'
 
 export { default as ProgressStepper } from './components/ProgressStepper'
 export { default as ServiceSelection } from './components/ServiceSelection'

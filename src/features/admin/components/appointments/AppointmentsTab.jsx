@@ -3,7 +3,7 @@ import React, { useState, useMemo } from 'react'
 import { useAppointments } from '../../hooks/useAppointments'
 
 export default function AppointmentsTab() {
-  const { appointments, loading, error, updateAppointmentStatus, refreshAppointments, bulkUpdateAppointments } = useAppointments()
+  const { appointments, loading, error, updateAppointmentStatus, refreshAppointments, bulkUpdateAppointments, deleteAppointment, bulkDeleteAppointments } = useAppointments()
   const [statusFilter, setStatusFilter] = useState('all')
   const [dateFilter, setDateFilter] = useState('all')
   const [showNotesModal, setShowNotesModal] = useState(false)
@@ -16,6 +16,10 @@ export default function AppointmentsTab() {
   const [selectedAppointments, setSelectedAppointments] = useState(new Set())
   const [selectAll, setSelectAll] = useState(false)
   const [bulkActionLoading, setBulkActionLoading] = useState(false)
+
+  // Delete confirmation state
+  const [showDeleteModal, setShowDeleteModal] = useState(false)
+  const [deleteTarget, setDeleteTarget] = useState(null) // { type: 'single'|'bulk', id?: string, ids?: string[], name?: string }
 
   // Filter appointments
   const filteredAppointments = useMemo(() => {
@@ -84,6 +88,45 @@ export default function AppointmentsTab() {
     } finally {
       setBulkActionLoading(false)
     }
+  }
+
+  // Delete handlers
+  const handleDeleteClick = (appointment) => {
+    setDeleteTarget({ type: 'single', id: appointment.id, name: appointment.patient_name })
+    setShowDeleteModal(true)
+  }
+
+  const handleBulkDeleteClick = () => {
+    if (selectedAppointments.size === 0) return
+    setDeleteTarget({ type: 'bulk', ids: Array.from(selectedAppointments) })
+    setShowDeleteModal(true)
+  }
+
+  const handleConfirmDelete = async () => {
+    if (!deleteTarget) return
+
+    setBulkActionLoading(true)
+    try {
+      let result
+      if (deleteTarget.type === 'single') {
+        result = await deleteAppointment(deleteTarget.id)
+      } else {
+        result = await bulkDeleteAppointments(deleteTarget.ids)
+        if (result.success) {
+          setSelectedAppointments(new Set())
+          setSelectAll(false)
+        }
+      }
+    } finally {
+      setBulkActionLoading(false)
+      setShowDeleteModal(false)
+      setDeleteTarget(null)
+    }
+  }
+
+  const handleCancelDelete = () => {
+    setShowDeleteModal(false)
+    setDeleteTarget(null)
   }
 
   // Status badge component
@@ -306,6 +349,20 @@ export default function AppointmentsTab() {
                       Cancel Selected
                     </button>
                   </div>
+
+                  {/* Bulk Delete Button */}
+                  <button
+                    className="btn btn-danger btn-sm ms-2"
+                    onClick={handleBulkDeleteClick}
+                    disabled={bulkActionLoading}
+                  >
+                    {bulkActionLoading ? (
+                      <span className="spinner-border spinner-border-sm me-2"></span>
+                    ) : (
+                      <i className="bi bi-trash me-2"></i>
+                    )}
+                    Delete Selected
+                  </button>
                 </div>
                 
                 <button
@@ -429,18 +486,28 @@ export default function AppointmentsTab() {
                           <StatusBadge status={appointment.status} />
                         </td>
                         <td className="text-center pe-4">
-                          <div className="btn-group btn-group-sm">
-                            {getActionButtons(appointment).map(button => (
-                              <button
-                                key={button.action}
-                                className={`btn btn-glass-action btn-${button.variant}`}
-                                onClick={() => handleStatusUpdate(appointment.id, button.action)}
-                                disabled={loading}
-                                title={button.label}
-                              >
-                                <i className={`bi ${button.icon}`}></i>
-                              </button>
-                            ))}
+                          <div className="d-flex align-items-center justify-content-center gap-1">
+                            <div className="btn-group btn-group-sm">
+                              {getActionButtons(appointment).map(button => (
+                                <button
+                                  key={button.action}
+                                  className={`btn btn-glass-action btn-${button.variant}`}
+                                  onClick={() => handleStatusUpdate(appointment.id, button.action)}
+                                  disabled={loading}
+                                  title={button.label}
+                                >
+                                  <i className={`bi ${button.icon}`}></i>
+                                </button>
+                              ))}
+                            </div>
+                            <button
+                              className="btn btn-sm btn-outline-danger"
+                              onClick={() => handleDeleteClick(appointment)}
+                              disabled={loading}
+                              title="Delete appointment"
+                            >
+                              <i className="bi bi-trash"></i>
+                            </button>
                           </div>
                         </td>
                       </tr>
@@ -545,6 +612,60 @@ export default function AppointmentsTab() {
                   onClick={handleCloseNotes}
                 >
                   Close
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* Delete Confirmation Modal */}
+      {showDeleteModal && (
+        <div className="modal fade show d-block" tabIndex="-1" style={{backgroundColor: 'rgba(0,0,0,0.5)'}}>
+          <div className="modal-dialog modal-dialog-centered">
+            <div className="modal-content glass-admin-card border-0">
+              <div className="modal-header glass-card-header border-0">
+                <h5 className="modal-title text-white">
+                  <i className="bi bi-exclamation-triangle me-2"></i>
+                  Confirm Deletion
+                </h5>
+                <button 
+                  type="button" 
+                  className="btn-close btn-close-white"
+                  onClick={handleCancelDelete}
+                ></button>
+              </div>
+              <div className="modal-body">
+                {deleteTarget?.type === 'single' ? (
+                  <p className="text-dark mb-0">
+                    Are you sure you want to delete the appointment for <strong>{deleteTarget.name}</strong>? This action cannot be undone.
+                  </p>
+                ) : (
+                  <p className="text-dark mb-0">
+                    Are you sure you want to delete <strong>{deleteTarget?.ids?.length}</strong> selected appointment(s)? This action cannot be undone.
+                  </p>
+                )}
+              </div>
+              <div className="modal-footer border-0">
+                <button 
+                  type="button" 
+                  className="btn btn-glass-admin"
+                  onClick={handleCancelDelete}
+                >
+                  Cancel
+                </button>
+                <button 
+                  type="button" 
+                  className="btn btn-danger"
+                  onClick={handleConfirmDelete}
+                  disabled={bulkActionLoading}
+                >
+                  {bulkActionLoading ? (
+                    <span className="spinner-border spinner-border-sm me-2"></span>
+                  ) : (
+                    <i className="bi bi-trash me-2"></i>
+                  )}
+                  Delete
                 </button>
               </div>
             </div>

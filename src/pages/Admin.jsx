@@ -50,8 +50,7 @@ function AdminContentWrapper({ onLogout }) {
       <div className="container-fluid py-4 px-4">
         <div className="row">
           {/* Sidebar Column */}
-          <div className={`col-md-3 col-lg-2 mb-4 ${sidebarOpen ? 'mobile-sidebar-open' : 'd-none d-md-block'}`}
-            style={{ position: 'relative', zIndex: 100 }}>
+          <div className={`col-md-3 col-lg-2 mb-4 ${sidebarOpen ? 'mobile-sidebar-open' : 'd-none d-md-block'}`}>
             <AdminSidebar onLogout={onLogout} onTabSelect={handleTabSelect} />
           </div>
 

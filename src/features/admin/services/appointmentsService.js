@@ -49,5 +49,23 @@ export const appointmentsService = {
       .in('id', appointmentIds)
 
     if (error) throw error
+  },
+
+  async deleteAppointment(appointmentId) {
+    const { error } = await supabase
+      .from('appointments')
+      .delete()
+      .eq('id', appointmentId)
+
+    if (error) throw error
+  },
+
+  async bulkDeleteAppointments(appointmentIds) {
+    const { error } = await supabase
+      .from('appointments')
+      .delete()
+      .in('id', appointmentIds)
+
+    if (error) throw error
   }
 }

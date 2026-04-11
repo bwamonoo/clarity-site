@@ -64,6 +64,38 @@ export function useAppointments() {
     }
   }
 
+  const deleteAppointment = async (appointmentId) => {
+    try {
+      await appointmentsService.deleteAppointment(appointmentId)
+
+      setAppointments(prev => prev.filter(apt => apt.id !== appointmentId))
+
+      setSuccess('Appointment deleted successfully')
+      return { success: true }
+    } catch (err) {
+      console.error('Error deleting appointment:', err)
+      setError(err.message)
+      setAdminError('Failed to delete appointment')
+      return { success: false, error: err.message }
+    }
+  }
+
+  const bulkDeleteAppointments = async (appointmentIds) => {
+    try {
+      await appointmentsService.bulkDeleteAppointments(appointmentIds)
+
+      setAppointments(prev => prev.filter(apt => !appointmentIds.includes(apt.id)))
+
+      setSuccess(`Successfully deleted ${appointmentIds.length} appointment(s)`)
+      return { success: true }
+    } catch (err) {
+      console.error('Error bulk deleting appointments:', err)
+      setError(err.message)
+      setAdminError(`Failed to delete ${appointmentIds.length} appointment(s)`)
+      return { success: false, error: err.message }
+    }
+  }
+
   useEffect(() => {
     fetchAppointments()
   }, [])
@@ -74,6 +106,8 @@ export function useAppointments() {
     error,
     updateAppointmentStatus,
     bulkUpdateAppointments,
+    deleteAppointment,
+    bulkDeleteAppointments,
     refreshAppointments: fetchAppointments
   }
 }

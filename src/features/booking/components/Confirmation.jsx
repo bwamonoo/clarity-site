@@ -126,10 +126,10 @@ export default function Confirmation() {
         >
           Book Another Appointment
         </button>
-        <button className="btn btn-outline-accent" onClick={downloadConfirmation}>
+        {/* <button className="btn btn-outline-accent" onClick={downloadConfirmation}>
           <i className="bi bi-download me-2"></i>
           Download Confirmation
-        </button>
+        </button> */}
       </div>
     </div>
   )

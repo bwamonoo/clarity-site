@@ -10,10 +10,9 @@ export default function ServiceSelection() {
       <div className="row g-4">
         {state.services.map((service) => (
           <div key={service.id} className="col-md-6">
-            <div 
-              className={`service-card h-100 p-4 rounded-3 bg-white shadow-sm cursor-pointer ${
-                state.selectedService?.id === service.id ? 'selected' : ''
-              }`}
+            <div
+              className={`service-card h-100 p-4 rounded-3 bg-white shadow-sm cursor-pointer ${state.selectedService?.id === service.id ? 'selected' : ''
+                }`}
               onClick={() => actions.setService(service)}
             >
               <div className="d-flex align-items-start gap-3">
@@ -24,8 +23,8 @@ export default function ServiceSelection() {
                   <h6 className="mb-2">{service.name}</h6>
                   <p className="small text-muted mb-2">{service.description}</p>
                   <div className="d-flex justify-content-between align-items-center">
-                    <span className="small text-muted">{service.duration} mins</span>
-                    <span className="fw-semibold text-accent">{service.price ? ` GH₵ ${service.price}` : ''}</span>
+                    {/* <span className="small text-muted">{service.duration} mins</span>
+                    <span className="fw-semibold text-accent">{service.price ? ` GH₵ ${service.price}` : ''}</span> */}
                   </div>
                 </div>
               </div>
@@ -34,7 +33,7 @@ export default function ServiceSelection() {
         ))}
       </div>
       <div className="d-flex justify-content-end mt-4">
-        <button 
+        <button
           className="btn btn-primary btn-gradient"
           disabled={!state.selectedService}
           onClick={() => actions.setStep(2)}

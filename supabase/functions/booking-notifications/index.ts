@@ -18,9 +18,9 @@ serve(async (req) => {
 
     // Get secrets
     const resendApiKey = Deno.env.get("RESEND_API_KEY");
-    const twilioAccountSid = Deno.env.get("TWILIO_ACCOUNT_SID");
-    const twilioAuthToken = Deno.env.get("TWILIO_AUTH_TOKEN");
-    const twilioSenderNumber = Deno.env.get("TWILIO_SENDER_NUMBER");
+    const hubtelClientId = Deno.env.get("HUBTEL_CLIENT_ID");
+    const hubtelClientSecret = Deno.env.get("HUBTEL_CLIENT_SECRET");
+    const hubtelSenderId = Deno.env.get("HUBTEL_SENDER_ID");
 
     // Clinic info (defaults or from env)
     const clinicEmail = Deno.env.get("CLINIC_EMAIL");
@@ -59,28 +59,22 @@ Date/Time: ${appointmentDate} at ${appointmentTime}`;
       console.warn("Skipping Email: Missing RESEND_API_KEY or CLINIC_EMAIL");
     }
 
-    // --- 2. Send SMS via Twilio ---
-    if (twilioAccountSid && twilioAuthToken && twilioSenderNumber && clinicPhone) {
-      const twilioUrl = `https://api.twilio.com/2010-04-01/Accounts/${twilioAccountSid}/Messages.json`;
-      const params = new URLSearchParams();
-      params.append('To', clinicPhone);
-      params.append('From', twilioSenderNumber);
-      params.append('Body', messageBody);
+    // --- 2. Send SMS via Hubtel ---
+    if (hubtelClientId && hubtelClientSecret && hubtelSenderId && clinicPhone) {
+      const hubtelUrl = `https://smsc.hubtel.com/v1/messages/send?clientid=${encodeURIComponent(hubtelClientId)}&clientsecret=${encodeURIComponent(hubtelClientSecret)}&from=${encodeURIComponent(hubtelSenderId)}&to=${encodeURIComponent(clinicPhone)}&content=${encodeURIComponent(messageBody)}`;
 
-      const twilioPromise = fetch(twilioUrl, {
-        method: 'POST',
+      const hubtelPromise = fetch(hubtelUrl, {
+        method: 'GET',
         headers: {
-          'Authorization': 'Basic ' + btoa(`${twilioAccountSid}:${twilioAuthToken}`),
-          'Content-Type': 'application/x-www-form-urlencoded'
-        },
-        body: params
+          'Accept': 'application/json'
+        }
       }).then(res => res.json())
-        .then(data => console.log("Twilio response:", data))
-        .catch(err => console.error("Twilio error:", err));
+        .then(data => console.log("Hubtel response:", data))
+        .catch(err => console.error("Hubtel error:", err));
 
-      promises.push(twilioPromise);
+      promises.push(hubtelPromise);
     } else {
-      console.warn("Skipping SMS: Missing Twilio credentials or CLINIC_PHONE_NUMBER");
+      console.warn("Skipping SMS: Missing Hubtel credentials or CLINIC_PHONE_NUMBER");
     }
 
     // Wait for both to finish

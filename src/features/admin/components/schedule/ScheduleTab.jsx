@@ -31,7 +31,7 @@ export default function ScheduleTab() {
 
   // Handle schedule change
   const handleScheduleChange = (weekday, field, value) => {
-    setScheduleData(prev => prev.map(day => 
+    setScheduleData(prev => prev.map(day =>
       day.weekday === weekday ? { ...day, [field]: value } : day
     ))
   }
@@ -127,7 +127,7 @@ export default function ScheduleTab() {
                             </label>
                           </div>
                         </div>
-                        
+
                         <div className="col-md-9">
                           <div className="row g-3 align-items-center">
                             <div className="col-sm-4">
@@ -172,7 +172,7 @@ export default function ScheduleTab() {
                 ))}
               </div>
             </div>
-            
+
             <div className="col-lg-4">
               <div className="glass-admin-card border-0">
                 <div className="glass-card-body">
@@ -202,8 +202,8 @@ export default function ScheduleTab() {
                       Closed days will not show available slots
                     </li>
                   </ul>
-                  
-                  <div className="mt-4 p-3 rounded border" style={{background: 'rgba(255,255,255,0.3)'}}>
+
+                  <div className="mt-4 p-3 rounded border" style={{ background: 'rgba(255,255,255,0.3)' }}>
                     <h6 className="small text-muted mb-2">Quick Stats</h6>
                     <div className="d-flex justify-content-between mb-2">
                       <span>Open Days:</span>
@@ -213,7 +213,7 @@ export default function ScheduleTab() {
                     </div>
                     <div className="d-flex justify-content-between">
                       <span>Standard Hours:</span>
-                      <strong className="text-dark">9AM - 5PM</strong>
+                      <strong className="text-dark">{scheduleData[1].start_time}AM - {scheduleData[1].end_time}</strong>
                     </div>
                   </div>
                 </div>

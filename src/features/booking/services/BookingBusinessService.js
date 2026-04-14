@@ -1,5 +1,6 @@
 import { BookingApiService } from './BookingApiService'
 import { fmtDateISOLocal } from '../../../utils/dateUtils'
+import { supabase } from '../../../lib/supabaseClient'
 
 export class BookingBusinessService {
 
@@ -122,6 +123,19 @@ export class BookingBusinessService {
       }
 
       const result = await BookingApiService.createAppointment(appointmentData)
+
+      // Invoke the notification function non-blocking (fire and forget)
+      supabase.functions.invoke('booking-notifications', {
+        body: {
+          patientName: bookingData.customer.name,
+          patientPhone: bookingData.customer.phone,
+          serviceName: bookingData.service?.name || 'Appointment',
+          appointmentDate: dateStr,
+          appointmentTime: slotTime
+        }
+      }).catch(err => {
+        console.error('Error invoking notifications:', err)
+      })
 
       return {
         success: true,

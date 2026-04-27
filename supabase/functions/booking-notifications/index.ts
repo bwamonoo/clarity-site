@@ -18,9 +18,8 @@ serve(async (req) => {
 
     // Get secrets
     const resendApiKey = Deno.env.get("RESEND_API_KEY");
-    const hubtelClientId = Deno.env.get("HUBTEL_CLIENT_ID");
-    const hubtelClientSecret = Deno.env.get("HUBTEL_CLIENT_SECRET");
-    const hubtelSenderId = Deno.env.get("HUBTEL_SENDER_ID");
+    const arkeselApiKey = Deno.env.get("ARKESEL_API_KEY");
+    const arkeselSenderId = Deno.env.get("ARKESEL_SENDER_ID");
 
     // Clinic info (defaults or from env)
     const clinicEmail = Deno.env.get("CLINIC_EMAIL");
@@ -59,22 +58,26 @@ Date/Time: ${appointmentDate} at ${appointmentTime}`;
       console.warn("Skipping Email: Missing RESEND_API_KEY or CLINIC_EMAIL");
     }
 
-    // --- 2. Send SMS via Hubtel ---
-    if (hubtelClientId && hubtelClientSecret && hubtelSenderId && clinicPhone) {
-      const hubtelUrl = `https://smsc.hubtel.com/v1/messages/send?clientid=${encodeURIComponent(hubtelClientId)}&clientsecret=${encodeURIComponent(hubtelClientSecret)}&from=${encodeURIComponent(hubtelSenderId)}&to=${encodeURIComponent(clinicPhone)}&content=${encodeURIComponent(messageBody)}`;
-
-      const hubtelPromise = fetch(hubtelUrl, {
-        method: 'GET',
+    // --- 2. Send SMS via Arkesel ---
+    if (arkeselApiKey && arkeselSenderId && clinicPhone) {
+      const arkeselPromise = fetch("https://sms.arkesel.com/api/v2/sms/send", {
+        method: 'POST',
         headers: {
-          'Accept': 'application/json'
-        }
+          'api-key': arkeselApiKey,
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+          sender: arkeselSenderId,
+          message: messageBody,
+          recipients: [clinicPhone]
+        })
       }).then(res => res.json())
-        .then(data => console.log("Hubtel response:", data))
-        .catch(err => console.error("Hubtel error:", err));
+        .then(data => console.log("Arkesel response:", data))
+        .catch(err => console.error("Arkesel error:", err));
 
-      promises.push(hubtelPromise);
+      promises.push(arkeselPromise);
     } else {
-      console.warn("Skipping SMS: Missing Hubtel credentials or CLINIC_PHONE_NUMBER");
+      console.warn("Skipping SMS: Missing Arkesel credentials or CLINIC_PHONE_NUMBER");
     }
 
     // Wait for both to finish
